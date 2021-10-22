@@ -7,6 +7,7 @@ namespace TeduShop.Model.Models
     public class Footer
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { set; get; }
         [Required]
         public string Content { set; get; }

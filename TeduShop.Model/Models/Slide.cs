@@ -12,6 +12,7 @@ namespace TeduShop.Model.Models
     public class Slide
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         [Required]
         public string Name { get; set; }

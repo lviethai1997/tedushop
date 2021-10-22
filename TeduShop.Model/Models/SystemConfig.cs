@@ -7,6 +7,7 @@ namespace TeduShop.Model
     public class SystemConfig
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         public string Code { get; set; }

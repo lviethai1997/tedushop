@@ -9,6 +9,7 @@ namespace TeduShop.Model.Models
     public class Post : Aiditable
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         [Required]

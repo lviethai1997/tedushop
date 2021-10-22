@@ -9,6 +9,7 @@ namespace TeduShop.Model.Models
     {
         [Key]
         public int ID { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public DateTime VisitDate { get; set; }
         public string IPAddress { get; set; }
     }

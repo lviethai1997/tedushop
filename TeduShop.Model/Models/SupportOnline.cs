@@ -7,6 +7,7 @@ namespace TeduShop.Model
     public class SupportOnline
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         [Required]

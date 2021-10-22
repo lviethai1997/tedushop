@@ -8,6 +8,7 @@ namespace TeduShop.Model.Models
     public class Order
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         [Required]
