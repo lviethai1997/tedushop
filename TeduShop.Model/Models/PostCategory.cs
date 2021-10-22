@@ -27,7 +27,7 @@ namespace TeduShop.Model.Models
         public string Desciption { get; set; }
 
         [MaxLength(256)]
-        public string DisplayOrder { get; set; }
+        public int? DisplayOrder { get; set; }
 
         [MaxLength(256)]
         public string Image { get; set; }
