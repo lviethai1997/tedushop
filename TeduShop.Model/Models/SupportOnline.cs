@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TeduShop.Model
+namespace TeduShop.Model.Models
 {
     [Table("SupportOnlines")]
     public class SupportOnline
