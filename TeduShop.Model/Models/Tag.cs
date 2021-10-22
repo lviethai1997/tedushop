@@ -10,8 +10,12 @@ namespace TeduShop.Model.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
+
         [Required]
+        [MaxLength(250)]
         public string Name { get; set; }
+
+        [MaxLength(250)]
         public string Type { get; set; }
 
         public virtual IEnumerable<PostTag> PostTags { set; get; }

@@ -8,9 +8,14 @@ namespace TeduShop.Model.Models
     public class VisitorStatistic
     {
         [Key]
-        public int ID { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ID { get; set; }
+
+        [Required]
         public DateTime VisitDate { get; set; }
+
+        [MaxLength(50)]
+        [Required]
         public string IPAddress { get; set; }
     }
 }
