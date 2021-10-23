@@ -32,6 +32,6 @@ namespace TeduShop.Model.Models
         [MaxLength(250)]
         public string Facebook { get; set; }
 
-        public bool status { get; set; }
+        public bool Status { get; set; }
     }
 }

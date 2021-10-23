@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Xml.Linq;
 using TeduShop.Model.Abstract;
 
 namespace TeduShop.Model.Models
@@ -30,7 +29,8 @@ namespace TeduShop.Model.Models
         public string Image { get; set; }
 
         [Required]
-        public XElement MoreImage { get; set; }
+        [Column(TypeName = "XML")]
+        public string MoreImage { get; set; }
 
         [Required]
         public Decimal Price { get; set; }

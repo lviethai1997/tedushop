@@ -8,8 +8,9 @@ namespace TeduShop.Model.Models
     public class Tag
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
+        [MaxLength(50)]
+        [Column(TypeName = "varchar")]
+        public string ID { get; set; }
 
         [Required]
         [MaxLength(250)]
