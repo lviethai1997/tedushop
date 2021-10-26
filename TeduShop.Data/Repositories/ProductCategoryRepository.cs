@@ -17,7 +17,7 @@ namespace TeduShop.Data.Repositories
         }
     }
 
-    public interface IProductCategoryRepository
+    public interface IProductCategoryRepository: IRepository<ProductCategory>
     {
         IEnumerable<ProductCategory> GetByAlias(string alias);
     }

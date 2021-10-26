@@ -41,6 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OrderService.cs" />
+    <Compile Include="PostCategoriesService.cs" />
+    <Compile Include="PostService.cs" />
+    <Compile Include="ProductCategoriesService.cs" />
+    <Compile Include="ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
