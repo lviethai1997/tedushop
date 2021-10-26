@@ -21,7 +21,7 @@ namespace TeduShop.Service
 
         IEnumerable<Post> GetAllByTagPaging(string tag, int page, int pageSize, out int totalRow);
 
-        IEnumerable<PostCategory> GetPostByCategoryId(int parentId, int page, int pageSize, out int totalRow);
+        IEnumerable<Post> GetPostByCategoryId(int parentId, int page, int pageSize, out int totalRow);
 
         void SaveChanges();
     }
@@ -39,7 +39,7 @@ namespace TeduShop.Service
 
         public void Add(Post post)
         {
-            _postRepository.Add(post);
+             _postRepository.Add(post);
         }
 
         public void Delete(int id)
