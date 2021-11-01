@@ -20,6 +20,8 @@ namespace TeduShop.Service
         IEnumerable<PostCategory> GetByTagPaging(string tag, int page, int pageSize, out int totalRow);
 
         IEnumerable<PostCategory> GetByPaging(int page, int pageSize, out int totalRow);
+
+        void SaveChanges();
     }
 
     public class PostCategoriesService : IPostCategories
