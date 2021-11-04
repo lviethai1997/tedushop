@@ -19,12 +19,12 @@ namespace TeduShop.Web.Infrastructure.Core
             this._errorService = errorService;
         }
 
-        protected HttpResponseMessage CreateHttpResponse(HttpRequestMessage httpRequestMessage, Func<HttpResponseMessage> func)
+        protected HttpResponseMessage CreateHttpResponse(HttpRequestMessage requestMessage, Func<HttpResponseMessage> function)
         {
             HttpResponseMessage response = null;
             try
             {
-                func.Invoke();
+                response = function.Invoke();
             }
             catch (DbEntityValidationException ex)
             {
@@ -37,17 +37,17 @@ namespace TeduShop.Web.Infrastructure.Core
                     }
                 }
                 LogError(ex);
-                response = httpRequestMessage.CreateResponse(HttpStatusCode.BadRequest, ex.InnerException.Message);
+                response = requestMessage.CreateResponse(HttpStatusCode.BadRequest, ex.InnerException.Message);
             }
             catch (DbUpdateException dbEx)
             {
                 LogError(dbEx);
-                response = httpRequestMessage.CreateResponse(HttpStatusCode.BadRequest, dbEx.InnerException.Message);
+                response = requestMessage.CreateResponse(HttpStatusCode.BadRequest, dbEx.InnerException.Message);
             }
             catch (Exception ex)
             {
                 LogError(ex);
-                response = httpRequestMessage.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                response = requestMessage.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
             }
             return response;
         }

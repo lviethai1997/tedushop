@@ -1,42 +1,42 @@
-﻿using System.Net.Http;
+﻿using AutoMapper;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Web.Mvc;
 using TeduShop.Model.Models;
 using TeduShop.Service;
 using TeduShop.Web.Infrastructure.Core;
+using TeduShop.Web.Infrastructure.Extenstion;
+using TeduShop.Web.Models;
 
 namespace TeduShop.Web.api
 {
-    [RoutePrefix("api/postCategory")]
+    [RoutePrefix("Api/PostCategoy")]
     public class PostCategoyController : ApiControllerBase
     {
         private IPostCategories _postCategories;
-
-        [Route("getall")]
-        public HttpResponseMessage Get(HttpRequestMessage httpRequest)
-        {
-            return CreateHttpResponse(httpRequest, () =>
-            {
-                HttpResponseMessage responseMessage = null;
-                if (ModelState.IsValid)
-                {
-                    httpRequest.CreateErrorResponse(System.Net.HttpStatusCode.BadRequest, ModelState);
-                }
-                else
-                {
-                    var list = _postCategories.GetAll();
-
-                    responseMessage = httpRequest.CreateResponse(list);
-                }
-                return responseMessage;
-            });
-        }
 
         public PostCategoyController(IErrorService errorService, IPostCategories postCategories) : base(errorService)
         {
             this._postCategories = postCategories;
         }
 
-        public HttpResponseMessage Post(HttpRequestMessage httpRequest, PostCategory postCategory)
+        [Route("getall")]
+        public HttpResponseMessage Get(HttpRequestMessage httpRequest)
+        {
+            return CreateHttpResponse(httpRequest, () =>
+            {
+                var listCategory = _postCategories.GetAll().ToList();
+                var listCategoryViewModel = Mapper.Map<List<PostCategoryViewModel>>(listCategory);
+
+                HttpResponseMessage response = httpRequest.CreateResponse(HttpStatusCode.OK, listCategoryViewModel);
+                return response;
+            });
+        }
+
+        [Route("Add")]
+        public HttpResponseMessage Post(HttpRequestMessage httpRequest, PostCategoryViewModel postCategoryVM)
         {
             return CreateHttpResponse(httpRequest, () =>
             {
@@ -47,7 +47,9 @@ namespace TeduShop.Web.api
                 }
                 else
                 {
-                    var category = _postCategories.Add(postCategory);
+                    PostCategory newpostCategory = new PostCategory();
+                    newpostCategory.UpdatePostCategory(postCategoryVM);
+                    var category = _postCategories.Add(newpostCategory);
                     _postCategories.SaveChanges();
 
                     responseMessage = httpRequest.CreateResponse(System.Net.HttpStatusCode.Created, category);
@@ -56,7 +58,8 @@ namespace TeduShop.Web.api
             });
         }
 
-        public HttpResponseMessage Put(HttpRequestMessage httpRequest, PostCategory postCategory)
+        [Route("Update")]
+        public HttpResponseMessage Put(HttpRequestMessage httpRequest, PostCategoryViewModel postCategoryVM)
         {
             return CreateHttpResponse(httpRequest, () =>
             {
@@ -67,7 +70,9 @@ namespace TeduShop.Web.api
                 }
                 else
                 {
-                    _postCategories.Update(postCategory);
+                    var postCategoryDB = _postCategories.GetById(postCategoryVM.ID);
+                    postCategoryDB.UpdatePostCategory(postCategoryVM);
+                    _postCategories.Update(postCategoryDB);
                     _postCategories.SaveChanges();
 
                     responseMessage = httpRequest.CreateResponse(System.Net.HttpStatusCode.OK);

@@ -33,6 +33,6 @@ namespace TeduShop.Model.Models
 
         public bool HomeFlag { get; set; }
 
-        public virtual IEnumerable<PostCategory> PostCategories { get; set; }
+        public virtual IEnumerable<Post> Posts { get; set; }
     }
 }
