@@ -1037,8 +1037,11 @@
     <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\components\" />
+    <Folder Include="app\shared\" />
     <Folder Include="App_Data\" />
-    <Folder Include="Assets\admin\" />
+    <Folder Include="Assets\admin\image\" />
+    <Folder Include="Assets\admin\js\" />
     <Folder Include="Assets\client\" />
     <Folder Include="Scripts\plugins\" />
     <Folder Include="Scripts\spa\" />
