@@ -187,6 +187,7 @@
   <ItemGroup>
     <Compile Include="Api\AccountController.cs" />
     <Compile Include="Api\PostCategoyController.cs" />
+    <Compile Include="Api\ProductCategoryController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -205,6 +206,7 @@
     <Compile Include="Models\PostCategoryViewModel.cs" />
     <Compile Include="Models\PostTagViewModel.cs" />
     <Compile Include="Models\PostViewModel.cs" />
+    <Compile Include="Models\ProductCategoryViewModel.cs" />
     <Compile Include="Models\ProductTagViewModel.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\TagViewModel.cs" />
@@ -214,12 +216,15 @@
     <Content Include="app\app.js" />
     <Content Include="app\components\Home\HomeController.js" />
     <Content Include="app\components\Home\HomeView.html" />
-    <Content Include="app\components\products\productAddController.js" />
-    <Content Include="app\components\products\productAddView.html" />
-    <Content Include="app\components\products\productEditController.js" />
-    <Content Include="app\components\products\productEditView.html" />
-    <Content Include="app\components\products\productListController.js" />
-    <Content Include="app\components\products\productListView.html" />
+    <Content Include="app\components\ProductCategories\productCategoryListController.js" />
+    <Content Include="app\components\ProductCategories\productCategoryListView.html" />
+    <Content Include="app\components\Products\productAddController.js" />
+    <Content Include="app\components\Products\productAddView.html" />
+    <Content Include="app\components\Products\productEditController.js" />
+    <Content Include="app\components\Products\productEditView.html" />
+    <Content Include="app\components\Products\productListController.js" />
+    <Content Include="app\components\Products\productListView.html" />
+    <Content Include="app\shared\Services\apiService.js" />
     <Content Include="Assets\admin\css\bootstrap.min.css" />
     <Content Include="Assets\admin\css\demo\nifty-demo.min.css" />
     <Content Include="Assets\admin\css\nifty.min.css" />
@@ -398,7 +403,7 @@
     <Content Include="Assets\admin\Scripts\angular-cookies.min.js.map" />
     <Content Include="Assets\admin\Scripts\angular-aria.min.js.map" />
     <Content Include="Assets\admin\Scripts\angular-animate.min.js.map" />
-    <Content Include="app\components\products\products.module.js" />
+    <Content Include="app\components\Products\products.module.js" />
     <Content Include="Assets\admin\plugins\font-awesome\fonts\fontawesome-webfontd41d.eot" />
     <Content Include="Assets\admin\plugins\font-awesome\fonts\fontawesome-webfonte0a5.eot" />
     <Content Include="Assets\admin\plugins\font-awesome\fonts\fontawesome-webfonte0a5.ttf" />
@@ -409,6 +414,7 @@
     <Content Include="Assets\admin\plugins\fooTable\css\fonts\footable.woff" />
     <Content Include="Assets\admin\plugins\fooTable\css\fonts\footabled41d.eot" />
     <Content Include="app\shared\Modules\tedushop.common.js" />
+    <Content Include="app\components\ProductCategories\productCategory.module.js" />
     <None Include="Assets\admin\Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Assets\admin\Scripts\bootstrap.js" />
     <Content Include="Assets\admin\Scripts\bootstrap.min.js" />
@@ -1184,13 +1190,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\components\Orders\" />
-    <Folder Include="app\components\ProductCategories\" />
     <Folder Include="app\components\Roles\" />
     <Folder Include="app\components\Users\" />
     <Folder Include="app\shared\Directive\" />
     <Folder Include="app\shared\Footer\" />
     <Folder Include="app\shared\Navigation\" />
-    <Folder Include="app\shared\Services\" />
     <Folder Include="App_Data\" />
     <Folder Include="Assets\admin\libs\" />
     <Folder Include="Assets\admin\Scripts\plugins\" />

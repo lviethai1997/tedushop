@@ -3,30 +3,23 @@ using System.Collections.Generic;
 
 namespace TeduShop.Web.Models
 {
-    public class ProductViewModel
+    public class ProductCategoryViewModel
     {
+        public int ID { get; set; }
+
         public string Name { get; set; }
 
         public string Alias { get; set; }
 
-        public int CategoryID { get; set; }
-
-        public string Image { get; set; }
-
-        public string MoreImage { get; set; }
-
-        public Decimal Price { get; set; }
-
-        public Decimal Promotion { get; set; }
-        public int Warranty { get; set; }
+        public int ParentID { get; set; }
 
         public string Description { get; set; }
 
-        public string Content { get; set; }
+        public int? DisplayOrder { get; set; }
+
+        public string Image { get; set; }
 
         public bool HomeFlag { get; set; }
-        public bool HotFlag { get; set; }
-        public int ViewCount { get; set; }
 
         public string MetaKeyword { get; set; }
         public string MetaDescription { get; set; }
@@ -36,8 +29,6 @@ namespace TeduShop.Web.Models
         public string UpdatedBy { get; set; }
         public bool Status { get; set; }
 
-        public virtual ProductCategoryViewModel ProductCategoryViewModel { get; set; }
-
-        public virtual IEnumerable<ProductTagViewModel> ProductTagViewModel { get; set; }
+        public virtual IEnumerable<ProductViewModel> ProductViewModel { get; set; }
     }
 }
