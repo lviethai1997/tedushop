@@ -224,6 +224,7 @@
     <Content Include="app\components\Products\productEditView.html" />
     <Content Include="app\components\Products\productListController.js" />
     <Content Include="app\components\Products\productListView.html" />
+    <Content Include="app\shared\filters\statusFilter.js" />
     <Content Include="app\shared\Services\apiService.js" />
     <Content Include="Assets\admin\css\bootstrap.min.css" />
     <Content Include="Assets\admin\css\demo\nifty-demo.min.css" />
