@@ -201,6 +201,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Core\ApiControllerBase.cs" />
+    <Compile Include="Infrastructure\Core\PaginationSet.cs" />
     <Compile Include="Infrastructure\Extenstion\EntityExtensions.cs" />
     <Compile Include="Mappings\AutoMapperConfiguration.cs" />
     <Compile Include="Models\PostCategoryViewModel.cs" />
@@ -224,6 +225,8 @@
     <Content Include="app\components\Products\productEditView.html" />
     <Content Include="app\components\Products\productListController.js" />
     <Content Include="app\components\Products\productListView.html" />
+    <Content Include="app\shared\Directive\pagerDirective.js" />
+    <Content Include="app\shared\Directive\pagerPanigation.html" />
     <Content Include="app\shared\filters\statusFilter.js" />
     <Content Include="app\shared\Services\apiService.js" />
     <Content Include="Assets\admin\css\bootstrap.min.css" />
@@ -1193,7 +1196,6 @@
     <Folder Include="app\components\Orders\" />
     <Folder Include="app\components\Roles\" />
     <Folder Include="app\components\Users\" />
-    <Folder Include="app\shared\Directive\" />
     <Folder Include="app\shared\Footer\" />
     <Folder Include="app\shared\Navigation\" />
     <Folder Include="App_Data\" />

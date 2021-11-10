@@ -15,21 +15,35 @@ namespace TeduShop.Web.Api
     [RoutePrefix("api/productCategory")]
     public class ProductCategoryController : ApiControllerBase
     {
-        IProductCategoriesService _productCategoriesService;
+        private IProductCategoriesService _productCategoriesService;
 
-      public ProductCategoryController(IErrorService errorService,IProductCategoriesService productCategoriesService) : base(errorService)
+        public ProductCategoryController(IErrorService errorService, IProductCategoriesService productCategoriesService) : base(errorService)
         {
             this._productCategoriesService = productCategoriesService;
         }
 
         [Route("GetAll")]
-        public HttpResponseMessage GetAll(HttpRequestMessage requestMessage) 
+        public HttpResponseMessage GetAll(HttpRequestMessage requestMessage, int page, int pageSize = 20)
         {
             return CreateHttpResponse(requestMessage, () =>
              {
+                 int totalRow = 0;
+
                  var model = _productCategoriesService.GetAll();
-                 var responseData = Mapper.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(model);
-                 var response = requestMessage.CreateResponse(HttpStatusCode.OK, responseData);
+                 totalRow = model.Count();
+
+                 var query = model.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
+
+                 var responseData = Mapper.Map<IEnumerable<ProductCategory>, IEnumerable<ProductCategoryViewModel>>(query);
+
+                 var paginationSet = new PaginationSet<ProductCategoryViewModel>()
+                 {
+                     Items = responseData,
+                     Page = page,
+                     TotalCount = totalRow,
+                     TotalPage = (int)Math.Ceiling((decimal)totalRow / pageSize)
+                 };
+                 var response = requestMessage.CreateResponse(HttpStatusCode.OK, paginationSet);
 
                  return response;
              });
