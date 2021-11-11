@@ -1,23 +1,37 @@
 ﻿(function (app) {
     app.controller('productCategoryListController', productCategoryListController)
 
-    productCategoryListController.$inject = ['$scope', 'apiService'];
+    productCategoryListController.$inject = ['$scope', 'apiService','notificationService'];
 
-    function productCategoryListController($scope, apiService) {
+    function productCategoryListController($scope, apiService, notificationService) {
         $scope.productCategories = [];
         $scope.page = 0;
         $scope.pagesCount = 0;
         $scope.getProductCagories = getProductCagories;
+        $scope.keyword = '';
+
+        $scope.search = search;
+
+        function search() {
+            getProductCagories();
+        }
 
         function getProductCagories(page) {
             page = page || 0;
             var config = {
                 params: {
+                    keyword: $scope.keyword,
                     page: page,
-                    pageSize: 2
+                    pageSize: 20
                 }
             }
             apiService.get('/api/productCategory/GetAll', config, function (result) {
+                if (result.data.TotalCount == 0) {
+                    notificationService.displayWarning('Không tìm thấy dữ liệu nào!')
+                } else {
+                    notificationService.displayInfor('Tìm thấy ' + result.data.TotalCount+' bản ghi!')
+                }
+
                 $scope.productCategories = result.data.Items;
                 $scope.page = result.data.Page;
                 $scope.pagesCount = result.data.TotalPage;

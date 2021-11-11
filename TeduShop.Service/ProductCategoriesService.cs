@@ -17,6 +17,8 @@ namespace TeduShop.Service
 
         IEnumerable<ProductCategory> GetAll();
 
+        IEnumerable<ProductCategory> GetAll(string keyword);
+
         IEnumerable<ProductCategory> GetByPaging(int page, int pageSize, out int totalRow);
 
         IEnumerable<ProductCategory> GetByTagPaging(string Tag, int page, int pageSize, out int totalRow);
@@ -78,6 +80,18 @@ namespace TeduShop.Service
         public IEnumerable<ProductCategory> GetByParentId(int parentId)
         {
             return _productCategoryRepository.GetMulti(x => x.Status && x.ParentID == parentId);
+        }
+
+        public IEnumerable<ProductCategory> GetAll(string keyword)
+        {
+            if (string.IsNullOrEmpty(keyword))
+            {
+                return _productCategoryRepository.GetAll();
+            }
+            else
+            {
+                return _productCategoryRepository.GetMulti(x => x.Name.Contains(keyword));
+            }
         }
     }
 }

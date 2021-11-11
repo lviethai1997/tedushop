@@ -229,6 +229,7 @@
     <Content Include="app\shared\Directive\pagerPanigation.html" />
     <Content Include="app\shared\filters\statusFilter.js" />
     <Content Include="app\shared\Services\apiService.js" />
+    <Content Include="app\shared\Services\notificationService.js" />
     <Content Include="Assets\admin\css\bootstrap.min.css" />
     <Content Include="Assets\admin\css\demo\nifty-demo.min.css" />
     <Content Include="Assets\admin\css\nifty.min.css" />
@@ -357,6 +358,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\toastr.css" />
+    <Content Include="Content\toastr.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1181,6 +1184,8 @@
     <Content Include="Assets\admin\Scripts\test-bundles\angular-touch.js" />
     <Content Include="scripts\angular-ui-router.js" />
     <Content Include="scripts\angular-ui-router.min.js" />
+    <Content Include="scripts\toastr.js" />
+    <Content Include="scripts\toastr.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1223,6 +1228,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\toastr.scss" />
+    <Content Include="Content\toastr.less" />
     <None Include="packages.config" />
     <Content Include="Assets\admin\Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Assets\admin\Scripts\jquery-3.4.1.min.map" />
