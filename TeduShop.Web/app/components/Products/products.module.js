@@ -7,11 +7,11 @@
 
     function config($stateProvider, $urlRouterProvider) {
         $stateProvider.state('products_list', {
-            URL: "/products_list",
+            url: "/products_list",
             templateUrl: "/app/components/Products/productListView.html",
             controller: "productListController"
         }).state('product_add', {
-            URL: "/product_add",
+            url: "/product_add",
             templateUrl: "/app/components/Products/productAddView.html",
             controller: "productAddController"
         });

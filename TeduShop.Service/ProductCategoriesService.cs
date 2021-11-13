@@ -24,6 +24,7 @@ namespace TeduShop.Service
         IEnumerable<ProductCategory> GetByTagPaging(string Tag, int page, int pageSize, out int totalRow);
 
         IEnumerable<ProductCategory> GetByParentId(int parentId);
+        void SaveChanges();
     }
 
     public class ProductCategoriesService : IProductCategoriesService

@@ -28,8 +28,6 @@
             apiService.get('/api/productCategory/GetAll', config, function (result) {
                 if (result.data.TotalCount == 0) {
                     notificationService.displayWarning('Không tìm thấy dữ liệu nào!')
-                } else {
-                    notificationService.displayInfor('Tìm thấy ' + result.data.TotalCount+' bản ghi!')
                 }
 
                 $scope.productCategories = result.data.Items;

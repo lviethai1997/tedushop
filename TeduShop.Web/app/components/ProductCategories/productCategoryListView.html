@@ -14,11 +14,13 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <div id="demo-dt-basic_filter" class="dataTables_filter">
+                    <div id="demo-dt-basic_filter" class="dataTables_filter col-sm-3">
                         <label>
                            <input type="search" class="input-sm" ng-model="keyword" ng-change="search()" placeholder="@Search">
-                            <button class="btn btn-success">Search</button>
                         </label>
+                    </div>
+                    <div class="col-sm-3">
+                        <button class="btn btn-success" ui-sref="productsCategory_add_view" style="float:right">Thêm Mới</button>
                     </div>
                 </div>
             </div>
@@ -48,7 +50,7 @@
                                 </span>
                             </td>
                             <td>
-                                <button class="btn btn-info btn-rounded" data-target="#demo-modal-wo-anim" data-toggle="modal"><i class="fas fa-pencil-alt"></i></button>
+                                <button class="btn btn-info btn-rounded" ui-sref="productsCategory_edit_view({id:item.ID})"><i class="fas fa-pencil-alt"></i></button>
                                 <button class="btn btn-warning btn-rounded"><i class="far fa-trash-alt"></i></button>
                             </td>
                         </tr>

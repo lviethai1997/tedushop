@@ -1,0 +1,89 @@
+﻿<div class="col-sm-12">
+    <div class="panel">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Thêm mới danh mục sản phẩm
+            </h3>
+        </div>
+        <form class="form-horizontal" novalidate name="frmAddProductCategory" role="form" ng-submit="AddProductCategory()">
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">Name</label>
+                    <div class="col-sm-11">
+                        <input type="text" placeholder="Name" name="name" ng-model="productCategory.Name" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">Alias</label>
+                    <div class="col-sm-11">
+                        <input type="text" placeholder="Alias" name="alias" ng-model="productCategory.Alias" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">DisplayOrder</label>
+                    <div class="col-sm-11">
+                        <input type="number" placeholder="DisplayOrder" name="displayOrder" ng-model="productCategory.DisplayOrder" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">ParentID</label>
+                    <div class="col-sm-11">
+                        <select class="form-control" name="parentId" ng-model="productCategory.ParentID" ng-options="option.ID as option.Name for option in parentCategories">
+                            <option value="">Danh mục gốc</option>
+                        </select>
+                        <input type="hidden" name="parentId" ng-model="productCategory.ParentID" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">Description</label>
+                    <div class="col-sm-11">
+                        <textarea type="text" placeholder="Description" name="description" ng-model="productCategory.Description" rows="13" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">MetaKeyword</label>
+                    <div class="col-sm-11">
+                        <input type="text" placeholder="MetaKeyword" name="metaKeyword" ng-model="productCategory.MetaKeyword" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-1 control-label">MetaDescription</label>
+                    <div class="col-sm-11">
+                        <textarea type="text" placeholder="MetaDescription" rows="10" name="metaDescription" ng-model="productCategory.MetaDescription" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-11">
+                        <label class="form-normal form-primary form-text">
+                            <input type="checkbox" name="homeFlag" ng-checked="productCategory.HomeFlag" ng-model="productCategory.HomeFlag"> Hiển thị trang chủ
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-11">
+                        <label class="form-normal form-primary form-text">
+                            <input type="checkbox" name="status" ng-checked="productCategory.Status" ng-model="productCategory.Status"> Hoạt Động
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="panel-footer text-left col-sm-6">
+                            <button class="btn btn-info" type="submit">Thêm mới</button>
+                        </div>
+                        <div class="panel-footer text-right col-sm-6">
+                            <a class="btn btn-default" ui-sref="productsCategory_list">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
