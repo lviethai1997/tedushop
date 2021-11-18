@@ -5,6 +5,8 @@
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
+
+
     function config($stateProvider, $urlRouterProvider) {
         $stateProvider.state('productsCategory_list', {
             url: "/productsCategory_list",

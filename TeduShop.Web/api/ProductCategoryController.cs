@@ -90,7 +90,7 @@ namespace TeduShop.Web.Api
                 else
                 {
                     var newProductCategory = new ProductCategory();
-             
+
                     newProductCategory.UpdateProductCategory(productCategoryViewModel);
 
                     _productCategoriesService.Add(newProductCategory);
@@ -126,6 +126,55 @@ namespace TeduShop.Web.Api
 
                     var responseData = Mapper.Map<ProductCategory, ProductCategoryViewModel>(dbProductCategory);
                     response = request.CreateResponse(HttpStatusCode.Created, responseData);
+                }
+                return response;
+            });
+        }
+
+        [Route("Delete")]
+        [HttpDelete]
+        [AllowAnonymous]
+        public HttpResponseMessage Delete(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    _productCategoriesService.Delete(id);
+                    _productCategoriesService.SaveChanges();
+                    response = request.CreateResponse(HttpStatusCode.OK);
+                }
+                return response;
+            });
+        }
+
+        [Route("DeleteMulti")]
+        [HttpDelete]
+        [AllowAnonymous]
+        public HttpResponseMessage DeleteMulti(HttpRequestMessage request, string items)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    string[] arr = items.Remove(items.Length - 1).Split(',');
+
+                    foreach (string item in arr)
+                    {
+                        _productCategoriesService.Delete(int.Parse(item.ToString().Trim()));
+                    }
+                    _productCategoriesService.SaveChanges();
+                    response = request.CreateResponse(HttpStatusCode.OK);
                 }
                 return response;
             });

@@ -43,8 +43,6 @@
             })
         }
 
-
-
         LoadparentCategories();
         loadProductCategoryDetail();
     }

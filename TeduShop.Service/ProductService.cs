@@ -16,12 +16,15 @@ namespace TeduShop.Service
         Product GetById(int id);
 
         IEnumerable<Product> GetAll();
+        IEnumerable<Product> GetAll(string keyword);
 
         IEnumerable<Product> GetAllPaging(int page, int pageSize, out int rowNumber);
 
         IEnumerable<Product> GetAllByTagPaging(string tag, int page, int pageSize, out int rowNumber);
 
         IEnumerable<Product> GetProductByCategoryId(int categoryId, int page, int pageSize, out int totalRowl);
+
+        void SaveChanges();
     }
 
     public class ProductService : IProductService
@@ -48,6 +51,18 @@ namespace TeduShop.Service
         public IEnumerable<Product> GetAll()
         {
             return _productRepository.GetAll(new string[] { "ProductCategory" });
+        }
+
+        public IEnumerable<Product> GetAll(string keyword)
+        {
+            if (string.IsNullOrEmpty(keyword))
+            {
+                return _productRepository.GetAll();
+            }
+            else
+            {
+                return _productRepository.GetMulti(x => x.Name.Contains(keyword));
+            }
         }
 
         public IEnumerable<Product> GetAllByTagPaging(string tag, int page, int pageSize, out int rowNumber)
