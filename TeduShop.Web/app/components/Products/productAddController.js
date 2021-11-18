@@ -3,7 +3,6 @@
 
     productAddController.$inject = ['apiService', '$scope', 'notificationService', '$state', 'commonService'];
 
-
     function productAddController(apiService, $scope, notificationService, $state, commonService) {
         $scope.product = {
             CreatedDate: new Date(),
@@ -19,19 +18,22 @@
         }
 
         $scope.ckeditorOptions = {
-            height: '200px',
+            height: '500px',
             language: 'vi'
         }
 
         function ChooseImage() {
             var finder = new CKFinder();
             finder.selectActionFunction = function (fileUrl) {
-                $scope.product.Image = fileUrl;
+                $scope.$apply(function () {
+                    $scope.product.Image = fileUrl;
+                })
             }
             finder.popup();
         }
-        
+
         function Addproduct() {
+            $scope.product.MoreImage = JSON.stringify($scope.moreImages);
             apiService.post('api/product/Create', $scope.product,
                 function (result) {
                     notificationService.displaySuccess(result.data.Name + ' đã được thêm mới.');
@@ -47,6 +49,18 @@
             }, function () {
                 console.log("cant get parentID");
             })
+        }
+
+        $scope.moreImages = [];
+
+        $scope.ChooseMoreImage = function () {
+            var finder = new CKFinder()
+            finder.selectActionFunction = function (fileUrl) {
+                $scope.$apply(function () {
+                    $scope.moreImages.push(fileUrl)
+                })
+            }
+            finder.popup();
         }
 
         LoadCategoriesID();

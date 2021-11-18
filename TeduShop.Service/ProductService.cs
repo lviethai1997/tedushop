@@ -54,7 +54,7 @@ namespace TeduShop.Service
                 for (var i = 0; i < tags.Length; i++)
                 {
                     var tagID = StringHelper.ToUnsignString(tags[i]);
-                    if (_tagRepository.Count(x => x.ID == tagID) == 0)
+                    if (_tagRepository.Count(x => x.ID == tagID.Trim()) == 0)
                     {
                         Tag tag = new Tag();
                         tag.ID = tagID;
@@ -119,7 +119,7 @@ namespace TeduShop.Service
                 for (var i = 0; i < tags.Length; i++)
                 {
                     var tagID = StringHelper.ToUnsignString(tags[i]);
-                    if (_tagRepository.Count(x => x.ID == tagID) == 0)
+                    if (_tagRepository.Count(x => x.ID == tagID.Trim()) == 0)
                     {
                         Tag tag = new Tag();
                         tag.ID = tagID;
