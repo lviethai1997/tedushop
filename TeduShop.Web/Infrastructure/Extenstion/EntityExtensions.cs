@@ -47,6 +47,7 @@ namespace TeduShop.Web.Infrastructure.Extenstion
             product.UpdatedDate = productViewModel.UpdatedDate;
             product.UpdatedBy = productViewModel.UpdatedBy;
             product.Status = productViewModel.Status;
+            product.Tags = productViewModel.Tags;
         }
 
         public static void UpdateProductCategory(this ProductCategory productCategory,ProductCategoryViewModel productCategoryViewModel)

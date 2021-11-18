@@ -7,10 +7,11 @@ namespace TeduShop.Data.Repositories
     {
         public ProductTagRepository(IDbFactory dbFactory) : base(dbFactory)
         {
+
         }
     }
 
-    public interface IProductTagRepository
+    public interface IProductTagRepository: IRepository<ProductTag>
     {
     }
 }

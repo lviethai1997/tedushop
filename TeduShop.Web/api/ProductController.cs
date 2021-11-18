@@ -78,7 +78,6 @@ namespace TeduShop.Web.Api
                 {
                     var newProduct = new Product();
                     newProduct.UpdateProduct(productViewModel);
-                    newProduct.Image = "CC";
                     newProduct.MoreImage = "CC";
                     newProduct.ViewCount = 0;
                     newProduct.CreatedDate = DateTime.Now;

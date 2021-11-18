@@ -101,6 +101,10 @@
     <Compile Include="Migrations\202111030258307_AddApplication-user.designer.cs">
       <DependentUpon>202111030258307_AddApplication-user.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202111180836289_AddFieldTags.cs" />
+    <Compile Include="Migrations\202111180836289_AddFieldTags.designer.cs">
+      <DependentUpon>202111180836289_AddFieldTags.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ErrorRepository.cs" />
@@ -147,6 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202111030258307_AddApplication-user.resx">
       <DependentUpon>202111030258307_AddApplication-user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202111180836289_AddFieldTags.resx">
+      <DependentUpon>202111180836289_AddFieldTags.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

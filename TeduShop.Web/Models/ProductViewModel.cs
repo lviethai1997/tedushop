@@ -37,6 +37,8 @@ namespace TeduShop.Web.Models
         public string UpdatedBy { get; set; }
         public bool Status { get; set; }
 
+        public string Tags { get; set; }
+
         public virtual ProductCategoryViewModel ProductCategoryViewModel { get; set; }
 
         public virtual IEnumerable<ProductTagViewModel> ProductTagViewModel { get; set; }
