@@ -11,9 +11,8 @@ namespace TeduShop.Model.Models
         public int ID { set; get; }
 
         [Required]
-        [MaxLength(256)]
+        [MaxLength()]
         public string Content { set; get; }
-
-        public bool Status { get; set; }
+        
     }
 }

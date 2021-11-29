@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TeduShop.Common;
 using TeduShop.Data.Infrastructure;
 using TeduShop.Data.Repositories;
@@ -20,11 +21,19 @@ namespace TeduShop.Service
 
         IEnumerable<Product> GetAll(string keyword);
 
+        IEnumerable<Product> GetTopSaleProducts(int top);
+
+        IEnumerable<Product> GetTopNewProducts(int top);
+
         IEnumerable<Product> GetAllPaging(int page, int pageSize, out int rowNumber);
 
         IEnumerable<Product> GetAllByTagPaging(string tag, int page, int pageSize, out int rowNumber);
 
         IEnumerable<Product> GetProductByCategoryId(int categoryId, int page, int pageSize, out int totalRowl);
+
+        IEnumerable<Product> GetProductByCategoryId(int categoryId);
+
+        IEnumerable<Product> GetProductByCategoryIdPaging(int categoryId,int page,int pageSize,out int totalRow);
 
         void SaveChanges();
     }
@@ -144,6 +153,30 @@ namespace TeduShop.Service
         public IEnumerable<Product> GetProductByCategoryId(int categoryId, int page, int pageSize, out int totalRowl)
         {
             return _productRepository.GetProductByCategoryId(categoryId, page, pageSize, out totalRowl);
+        }
+
+        public IEnumerable<Product> GetTopSaleProducts(int top)
+        {
+            return _productRepository.GetMulti(x => x.Promotion > 0 && x.Status == true).OrderByDescending(x => x.UpdatedDate).Take(top);
+        }
+
+        public IEnumerable<Product> GetTopNewProducts(int top)
+        {
+            return _productRepository.GetMulti(x => x.HotFlag == true && x.Status == true).OrderByDescending(x => x.CreatedDate).Take(top);
+        }
+
+        public IEnumerable<Product> GetProductByCategoryId(int categoryId)
+        {
+            return _productRepository.GetMulti(x => x.Status == true && x.CategoryID == categoryId).OrderByDescending(x => x.CreatedDate);
+        }
+
+        public IEnumerable<Product> GetProductByCategoryIdPaging(int categoryId, int page, int pageSize, out int totalRow)
+        {
+            var query = _productRepository.GetMulti(x => x.Status==true && x.CategoryID == categoryId).OrderByDescending(x=>x.CreatedDate);
+            totalRow = query.Count();
+
+            return query.Skip((page - 1)*pageSize).Take(pageSize);
+
         }
     }
 }

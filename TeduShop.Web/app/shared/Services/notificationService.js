@@ -19,7 +19,6 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         }
-       
 
         function displaySuccess(message) {
             toastr.success(message);
