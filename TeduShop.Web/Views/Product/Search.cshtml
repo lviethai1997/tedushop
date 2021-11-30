@@ -1,14 +1,14 @@
 ﻿@model TeduShop.Web.Infrastructure.Core.PaginationSet<TeduShop.Web.Models.ProductViewModel>
 @{
-    ViewBag.Title = "ProductInCategory";
+    var keyword = (string)ViewBag.keyword;
+    ViewBag.Title = "Kết quả tìm kiếm: " + keyword;
     Layout = "~/Views/Shared/Layouts.cshtml";
-    var category = (TeduShop.Web.Models.ProductCategoryViewModel)ViewBag.ProductInCategory;
 }
 
 <div class="collection-header">
     <div class="collection-hero">
-        <div class="collection-hero__image"><img class="blur-up ls-is-cached lazyloaded" data-src="@category.Image" src="@category.Image" alt="Women" title="Women"></div>
-        <div class="collection-hero__title-wrapper"><h1 class="collection-hero__title page-width">@category.Name</h1></div>
+        <div class="collection-hero__image"><img class="blur-up ls-is-cached lazyloaded" data-src="" src="" alt="Women" title="Women"></div>
+        <div class="collection-hero__title-wrapper"><h1 class="collection-hero__title page-width">Kết quả tìm kiếm: @keyword</h1></div>
     </div>
 </div>
 <div style="height:40px"></div>
@@ -266,7 +266,7 @@
                                 <div class="filters-toolbar__item">
                                     <label for="SortBy" class="hidden">Sort</label>
                                     <select name="SortBy" id="SortBy" class="filters-toolbar__input filters-toolbar__input--sort" onchange="location = this.value;">
-                                        <option value="#" selected="selected" >Chọn kiểu sắp xếp  </option>
+                                        <option value="#" selected="selected">Chọn kiểu sắp xếp  </option>
                                         <option value="?page=@Model.Page&sort=New"> Mới nhất</option>
                                         <option value="?page=@Model.Page&sort=discount"> Giảm giá nhiều</option>
                                         <option value="?page=@Model.Page&sort=price">Giá tăng dần</option>

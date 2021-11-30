@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using TeduShop.Common;
 using TeduShop.Model.Models;
@@ -14,10 +12,9 @@ namespace TeduShop.Web.Controllers
 {
     public class ProductController : Controller
     {
-        IProductCategoriesService _productCategoriesService;
-        ICommonService _commonService;
-        IProductService _productService;
-
+        private IProductCategoriesService _productCategoriesService;
+        private ICommonService _commonService;
+        private IProductService _productService;
 
         public ProductController(IProductCategoriesService productCategoriesService, ICommonService commonService, IProductService productService)
         {
@@ -25,12 +22,13 @@ namespace TeduShop.Web.Controllers
             this._commonService = commonService;
             this._productService = productService;
         }
+
         // GET: Product
-        public ActionResult ProductInCategory(int id, int page = 1)
+        public ActionResult ProductInCategory(int id, int page = 1, string sort = "")
         {
             int pageSize = int.Parse(ConfigHelper.GetByKey("PageSize"));
             int totalRow = 0;
-            var GetProductByCategoryId = _productService.GetProductByCategoryIdPaging(id, page, pageSize, out totalRow);
+            var GetProductByCategoryId = _productService.GetProductByCategoryIdPaging(id, page, pageSize, sort, out totalRow);
             var productViewmodel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(GetProductByCategoryId);
             int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
 
@@ -48,11 +46,42 @@ namespace TeduShop.Web.Controllers
             return View(paginationSet);
         }
 
+        public ActionResult Search(string keyword, int page = 1, string sort = "")
+        {
+            int pageSize = int.Parse(ConfigHelper.GetByKey("PageSize"));
+            int totalRow = 0;
+            var GetProductByCategoryId = _productService.GetProductByCategoryKeyWordPaging(keyword, page, pageSize, sort, out totalRow);
+            var productViewmodel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(GetProductByCategoryId);
+            int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
+
+            ViewBag.keyword = keyword;
+            var paginationSet = new PaginationSet<ProductViewModel>()
+            {
+                Items = productViewmodel,
+                MaxPage = int.Parse(ConfigHelper.GetByKey("MaxPage")),
+                Page = page,
+                TotalCount = totalRow,
+                TotalPage = totalPage,
+            };
+
+            return View(paginationSet);
+        }
+
         public ActionResult GetProductDetail(int id)
         {
             var GetProductById = _productService.GetById(id);
             var productViewmodel = Mapper.Map<Product, ProductViewModel>(GetProductById);
             return View(productViewmodel);
+        }
+
+        public JsonResult GetListProductByName(string keyword)
+        {
+            var model = _productService.GetListProductByName(keyword);
+            var ViewModel = model;
+            return Json(new
+            {
+                data = ViewModel,
+            }, JsonRequestBehavior.AllowGet);
         }
     }
 }
