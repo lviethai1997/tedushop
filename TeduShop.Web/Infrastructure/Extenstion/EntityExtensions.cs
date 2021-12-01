@@ -48,6 +48,8 @@ namespace TeduShop.Web.Infrastructure.Extenstion
             product.UpdatedBy = productViewModel.UpdatedBy;
             product.Status = productViewModel.Status;
             product.Tags = productViewModel.Tags;
+            product.Quantity = productViewModel.Quantity;
+            product.SellOut = productViewModel.SellOut;
         }
 
         public static void UpdateProductCategory(this ProductCategory productCategory,ProductCategoryViewModel productCategoryViewModel)

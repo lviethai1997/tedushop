@@ -25,6 +25,11 @@ namespace TeduShop.Model.Models
         public int CategoryID { get; set; }
 
         [Required]
+        public int Quantity { get; set; }
+
+        public string Size { get; set; }
+
+        [Required]
         [MaxLength(256)]
         public string Image { get; set; }
 
@@ -47,6 +52,8 @@ namespace TeduShop.Model.Models
         public bool HomeFlag { get; set; }
         public bool HotFlag { get; set; }
         public int ViewCount { get; set; }
+
+        public int SellOut { get; set; }
 
         public string Tags { get; set; }
 

@@ -39,6 +39,10 @@ namespace TeduShop.Service
 
         IEnumerable<string> GetListProductByName(string Name);
 
+        IEnumerable<Product> GetRatedProducts(int id, int top);
+
+        IEnumerable<Product> GetBestSeller(int id,int top);
+
         void SaveChanges();
     }
 
@@ -249,6 +253,18 @@ namespace TeduShop.Service
             totalRow = query.Count();
 
             return query.Skip((page - 1) * pageSize).Take(pageSize);
+        }
+
+        public IEnumerable<Product> GetRatedProducts(int id, int top)
+        {
+            var idCate = _productRepository.GetSingleById(id);
+            return _productRepository.GetMulti(x => x.Status && x.ID != id && x.CategoryID == idCate.CategoryID).OrderByDescending(x=>x.CreatedDate).Take(top);
+        }
+
+        public IEnumerable<Product> GetBestSeller(int id, int top)
+        {
+            var idCate = _productRepository.GetSingleById(id);
+            return _productRepository.GetMulti(x => x.Status && x.ID != id && x.CategoryID == idCate.CategoryID).OrderByDescending(x => x.SellOut).Take(top);
         }
     }
 }
