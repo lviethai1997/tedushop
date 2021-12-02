@@ -141,6 +141,40 @@ namespace TeduShop.Web.Api
             });
         }
 
+        [Route("ChangeStatus")]
+        [HttpGet]
+        [AllowAnonymous]
+        public HttpResponseMessage ChangeStatus(HttpRequestMessage request, int id)
+        {
+            return CreateHttpResponse(request, () =>
+            {
+                HttpResponseMessage response = null;
+                if (!ModelState.IsValid)
+                {
+                    response = request.CreateResponse(HttpStatusCode.BadRequest, ModelState);
+                }
+                else
+                {
+                    var getStatus = _productService.GetById(id);
+                    bool status;
+
+                    if (getStatus.Status == true)
+                    {
+                        status = false;
+                    }
+                    else
+                    {
+                        status = true;
+                    }
+
+                    _productService.UpdateStatus(id, status);
+                    _productService.SaveChanges();
+                    response = request.CreateResponse(HttpStatusCode.OK);
+                }
+                return response;
+            });
+        }
+
         [Route("DeleteMulti")]
         [HttpDelete]
         [AllowAnonymous]

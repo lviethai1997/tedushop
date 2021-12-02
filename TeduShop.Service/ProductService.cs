@@ -41,9 +41,19 @@ namespace TeduShop.Service
 
         IEnumerable<Product> GetRatedProducts(int id, int top);
 
-        IEnumerable<Product> GetBestSeller(int id,int top);
+        IEnumerable<Product> GetBestSeller(int id, int top);
+
+        void UpdateStatus(int id, bool status);
 
         void SaveChanges();
+
+        IEnumerable<Tag> GetListTagByProductID(int id);
+
+        void IncreaseView(int id);
+
+        Tag GetTag(string tagId);
+
+        IEnumerable<Product> GetListByProductTag(string tagId, int page, int pageSize, out int totalRow);
     }
 
     public class ProductService : IProductService
@@ -218,8 +228,6 @@ namespace TeduShop.Service
             return _productRepository.GetMulti(x => x.Status == true && x.Name.Contains(Name)).Select(y => y.Name);
         }
 
-     
-
         public IEnumerable<Product> GetProductByCategoryKeyWordPaging(string keyword, int page, int pageSize, string sort, out int totalRow)
         {
             var query = _productRepository.GetMulti(x => x.Status == true && x.Name.Contains(keyword)).OrderByDescending(x => x.CreatedDate);
@@ -258,13 +266,44 @@ namespace TeduShop.Service
         public IEnumerable<Product> GetRatedProducts(int id, int top)
         {
             var idCate = _productRepository.GetSingleById(id);
-            return _productRepository.GetMulti(x => x.Status && x.ID != id && x.CategoryID == idCate.CategoryID).OrderByDescending(x=>x.CreatedDate).Take(top);
+            return _productRepository.GetMulti(x => x.Status && x.ID != id && x.CategoryID == idCate.CategoryID).OrderByDescending(x => x.CreatedDate).Take(top);
         }
 
         public IEnumerable<Product> GetBestSeller(int id, int top)
         {
             var idCate = _productRepository.GetSingleById(id);
             return _productRepository.GetMulti(x => x.Status && x.ID != id && x.CategoryID == idCate.CategoryID).OrderByDescending(x => x.SellOut).Take(top);
+        }
+
+        public void UpdateStatus(int id, bool status)
+        {
+            var product = _productRepository.GetSingleById(id);
+            product.Status = status;
+            _productRepository.Update(product);
+        }
+
+        public IEnumerable<Tag> GetListTagByProductID(int id)
+        {
+            return _productTagRepository.GetMulti(x => x.ProductID == id, new string[] { "Tag" }).Select(y => y.Tag);
+        }
+
+        public void IncreaseView(int id)
+        {
+            var product = _productRepository.GetSingleById(id);
+            product.ViewCount += 1;
+            _productRepository.Update(product);
+        }
+
+        public IEnumerable<Product> GetListByProductTag(string tagId, int page, int pageSize, out int totalRow)
+        {
+            var model = _productRepository.GetProductByTag(tagId, page, pageSize, out totalRow);
+            totalRow = model.Count();
+            return model;
+        }
+
+        public Tag GetTag(string tagId)
+        {
+            return _tagRepository.GetSingleByCondition(x => x.ID == tagId);
         }
     }
 }

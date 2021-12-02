@@ -24,6 +24,13 @@ namespace TeduShop.Web
         );
 
             routes.MapRoute(
+            name: "Tag",
+            url: "tag/{tagId}.html",
+             namespaces: new string[] { "TeduShop.Web.Controllers" },
+            defaults: new { controller = "Product", action = "ListByTag", id = UrlParameter.Optional }
+);
+
+            routes.MapRoute(
               name: "Login",
               url: "dang-nhap.html",
                 namespaces: new string[] { "TeduShop.Web.Controllers" },
@@ -58,7 +65,13 @@ namespace TeduShop.Web
               defaults: new { controller = "Product", action = "GetProductDetail", id = UrlParameter.Optional }
           );
 
-  
+            routes.MapRoute(
+               name: "Home",
+               url: "trang-chu.html",
+                 namespaces: new string[] { "TeduShop.Web.Controllers" },
+               defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

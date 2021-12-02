@@ -2,8 +2,11 @@
   "name": "myproject",
   "version": "1.0.0",
   "devDependencies": {
+    "angular-ui-router": "^1.0.9",
     "ckeditor": "^4.9.2",
     "jquery": "^3.6.0",
-    "jquery-ui": "^1.12.1"
+    "jquery-ui": "^1.12.1",
+    "ng-ckeditor": "2.0.5",
+    "angular": "1.7.9"
   }
 }

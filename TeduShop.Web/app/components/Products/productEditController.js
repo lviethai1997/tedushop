@@ -1,7 +1,7 @@
 ﻿(function (app) {
     app.controller('productEditController', productEditController);
 
-    productEditController.$inject = ['apiService', '$scope', 'notificationService', '$state', '$stateParams','commonService'];
+    productEditController.$inject = ['apiService', '$scope', 'notificationService', '$state', '$stateParams', 'commonService'];
 
     function productEditController(apiService, $scope, notificationService, $state, $stateParams, commonService) {
         $scope.product = {
@@ -23,7 +23,7 @@
         }
 
         function loadproductDetail() {
-           
+
             apiService.get('api/product/GetById/' + $stateParams.id, null, function (result) {
                 $scope.product = result.data;
                 $scope.moreImages = JSON.parse($scope.product.MoreImage);
@@ -57,7 +57,7 @@
 
         function LoadCategoriesID() {
             apiService.get("api/productCategory/getAllParent", null, function (result) {
-                $scope.CategoriesID = result.data;
+                $scope.CategoriesID = result.data
             }, function () {
                 console.log("cant get parentID");
             })

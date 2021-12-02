@@ -68,10 +68,34 @@ namespace TeduShop.Web.Controllers
             return View(paginationSet);
         }
 
+        public ActionResult ListByTag(string tagId, int page = 1)
+        {
+            int pageSize = int.Parse(ConfigHelper.GetByKey("PageSize"));
+            int totalRow = 0;
+            var GetProductByCategoryId = _productService.GetListByProductTag(tagId, page, pageSize, out totalRow);
+            var productViewmodel = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(GetProductByCategoryId);
+            int totalPage = (int)Math.Ceiling((double)totalRow / pageSize);
+
+            ViewBag.Tag = Mapper.Map<Tag, TagViewModel>(_productService.GetTag(tagId));
+
+            var paginationSet = new PaginationSet<ProductViewModel>()
+            {
+                Items = productViewmodel,
+                MaxPage = int.Parse(ConfigHelper.GetByKey("MaxPage")),
+                Page = page,
+                TotalCount = totalRow,
+                TotalPage = totalPage,
+            };
+
+            return View(paginationSet);
+        }
+
         public ActionResult GetProductDetail(int id)
         {
             var GetProductById = _productService.GetById(id);
             var productViewmodel = Mapper.Map<Product, ProductViewModel>(GetProductById);
+
+            
 
             var relatedProduct = _productService.GetRatedProducts(id, 5);
             ViewBag.relatedProduct = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(relatedProduct);
@@ -81,6 +105,11 @@ namespace TeduShop.Web.Controllers
 
             List<string> listImages = new JavaScriptSerializer().Deserialize<List<string>>(productViewmodel.MoreImage);
             ViewBag.MoreImages = listImages;
+
+            ViewBag.Tags = Mapper.Map<IEnumerable<Tag>, IEnumerable<TagViewModel>>(_productService.GetListTagByProductID(id));
+
+            _productService.IncreaseView(id);
+            _productService.SaveChanges();
 
             return View(productViewmodel);
         }

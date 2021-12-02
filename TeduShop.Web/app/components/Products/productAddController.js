@@ -18,8 +18,7 @@
         }
 
         $scope.ckeditorOptions = {
-            height: '500px',
-            language: 'vi'
+            height: '500px'
         }
 
         function ChooseImage() {

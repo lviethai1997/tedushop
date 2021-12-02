@@ -1,14 +1,14 @@
 ﻿@model TeduShop.Web.Infrastructure.Core.PaginationSet<TeduShop.Web.Models.ProductViewModel>
 @{
-    var keyword = (string)ViewBag.keyword;
-    ViewBag.Title = "Kết quả tìm kiếm: " + keyword;
+    var Tag = (TeduShop.Web.Models.TagViewModel)ViewBag.Tag;
+    ViewBag.Title = "Kết quả tìm kiếm TAG: " + Tag.Name;
     Layout = "~/Views/Shared/Layouts.cshtml";
 }
 
 <div class="collection-header">
     <div class="collection-hero">
         <div class="collection-hero__image"><img class="blur-up ls-is-cached lazyloaded" data-src="" src="" alt="Women" title="Women"></div>
-        <div class="collection-hero__title-wrapper"><h1 class="collection-hero__title page-width">Kết quả tìm kiếm: @keyword</h1></div>
+        <div class="collection-hero__title-wrapper"><h1 class="collection-hero__title page-width">Kết quả tìm kiếm: @Tag.Name</h1></div>
     </div>
 </div>
 <div style="height:40px"></div>
@@ -86,7 +86,7 @@
                             <li><span class="swacth-btn">S</span></li>
                             <li><span class="swacth-btn">XXXL</span></li>
                             <li><span class="swacth-btn">XXL</span></li>
-                            <li><span class="swacth-btn">XS</span></span></li>
+                            <li><span class="swacth-btn">XS</span></li>
                         </ul>
                     </div>
                 </div>
@@ -210,9 +210,33 @@
                     </div>
                     <div class="widget-content">
                         <ul class="product-tags">
-                          
+                            <li><a href="#" title="Show products matching tag $100 - $400">$100 - $400</a></li>
+                            <li><a href="#" title="Show products matching tag $400 - $600">$400 - $600</a></li>
+                            <li><a href="#" title="Show products matching tag $600 - $800">$600 - $800</a></li>
+                            <li><a href="#" title="Show products matching tag Above $800">Above $800</a></li>
+                            <li><a href="#" title="Show products matching tag Allen Vela">Allen Vela</a></li>
+                            <li><a href="#" title="Show products matching tag Black">Black</a></li>
+                            <li><a href="#" title="Show products matching tag Blue">Blue</a></li>
+                            <li><a href="#" title="Show products matching tag Cantitate">Cantitate</a></li>
+                            <li><a href="#" title="Show products matching tag Famiza">Famiza</a></li>
+                            <li><a href="#" title="Show products matching tag Gray">Gray</a></li>
+                            <li><a href="#" title="Show products matching tag Green">Green</a></li>
+                            <li><a href="#" title="Show products matching tag Hot">Hot</a></li>
+                            <li><a href="#" title="Show products matching tag jean shop">jean shop</a></li>
+                            <li><a href="#" title="Show products matching tag jesse kamm">jesse kamm</a></li>
+                            <li><a href="#" title="Show products matching tag L">L</a></li>
+                            <li><a href="#" title="Show products matching tag Lardini">Lardini</a></li>
+                            <li><a href="#" title="Show products matching tag lareida">lareida</a></li>
+                            <li><a href="#" title="Show products matching tag Lirisla">Lirisla</a></li>
+                            <li><a href="#" title="Show products matching tag M">M</a></li>
+                            <li><a href="#" title="Show products matching tag mini-dress">mini-dress</a></li>
+                            <li><a href="#" title="Show products matching tag Monark">Monark</a></li>
+                            <li><a href="#" title="Show products matching tag Navy">Navy</a></li>
+                            <li><a href="#" title="Show products matching tag new">new</a></li>
+                            <li><a href="#" title="Show products matching tag new arrivals">new arrivals</a></li>
+                            <li><a href="#" title="Show products matching tag Orange">Orange</a></li>
+                            <li><a href="#" title="Show products matching tag oxford">oxford</a></li>
                             <li><a href="#" title="Show products matching tag Oxymat">Oxymat</a></li>
-
                         </ul>
                         <span class="btn btn--small btnview">View all</span>
                     </div>
@@ -237,20 +261,6 @@
                         <div class="row">
                             <div class="col-4 col-md-4 col-lg-4 text-center filters-toolbar__item filters-toolbar__item--count d-flex justify-content-center align-items-center">
                                 <span class="filters-toolbar__product-count">Tổng số sản phẩm: @Model.Count</span>
-                            </div>
-                            <div class="col-4 col-md-4 col-lg-4 text-right">
-                                <div class="filters-toolbar__item">
-                                    <label for="SortBy" class="hidden">Sort</label>
-                                    <select name="SortBy" id="SortBy" class="filters-toolbar__input filters-toolbar__input--sort" onchange="location = this.value;">
-                                        <option value="#" selected="selected">Chọn kiểu sắp xếp  </option>
-                                        <option value="?page=@Model.Page&sort=New"> Mới nhất</option>
-                                        <option value="?page=@Model.Page&sort=discount"> Giảm giá nhiều</option>
-                                        <option value="?page=@Model.Page&sort=price">Giá tăng dần</option>
-                                        <option value="?page=@Model.Page&sort=priceDESC">Giá giảm dần</option>
-                                        <option value="?page=@Model.Page&sort=popular">Nhiều lượt xem</option>
-                                    </select>
-                                    <input class="collection-header__default-sort" type="hidden" value="manual">
-                                </div>
                             </div>
                         </div>
                     </div>

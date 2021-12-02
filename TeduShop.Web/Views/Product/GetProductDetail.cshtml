@@ -5,6 +5,7 @@
     var productRalate = (IEnumerable<TeduShop.Web.Models.ProductViewModel>)ViewBag.relatedProduct;
     var bestSeller = (IEnumerable<TeduShop.Web.Models.ProductViewModel>)ViewBag.bestSeller;
     var listImages = ViewBag.MoreImages;
+    var Tags = (IEnumerable<TeduShop.Web.Models.TagViewModel>)ViewBag.Tags;
 }
 
 <div id="MainContent" class="main-content" role="main">
@@ -53,7 +54,7 @@
                             <a href="#" class="next" title="Next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
                         </div>
                         <div class="prInfoRow">
-                            <div class="product-stock"> <span class="instock ">Còn Hàng</span> <span class="outstock hide">Unavailable</span> </div>
+                            <div class="product-stock"> <span class="instock ">@Html.Raw((Model.Quantity == 0) ? "Hết hàng" : "Còn Hàng")</span> <span class="outstock hide">Unavailable</span> </div>
                             <div class="product-sku">SKU: <span class="variant-sku">19115-rdxs</span></div>
                             <div class="product-review"><a class="reviewLink" href="#tab2"><i class="font-13 fa fa-star"></i><i class="font-13 fa fa-star"></i><i class="font-13 fa fa-star"></i><i class="font-13 fa fa-star-o"></i><i class="font-13 fa fa-star-o"></i><span class="spr-badge-caption">6 reviews</span></a></div>
                         </div>
@@ -91,10 +92,7 @@
                         </div>
                     </div>
                     <div class="product-single__description rte">
-
-                        @Model.Description
-
-
+                        @Html.Raw(Model.Description)
                     </div>
                     <div id="quantity_message">Chỉ còn <span class="items">@Model.Quantity</span>  sản phẩm còn lại.</div>
                     <form method="post" action="http://annimexweb.com/cart/add" id="product_form_10508262282" accept-charset="UTF-8" class="product-form product-form-product-template hidedropdown" enctype="multipart/form-data">
@@ -136,7 +134,21 @@
                                 </div>
                             </div>
                         </div>
-                        <p class="infolinks"><a href="#sizechart" class="sizelink btn"> Size Guide</a> <a href="#productInquiry" class="emaillink btn"> Ask About this Product</a></p>
+
+                        <div class="sidebar_widget">
+                            <div class="widget-title">
+                                <h4>Product Tags</h4>
+                            </div>
+                            <div class="widget-content">
+                                <ul class="product-tags">
+                                    @foreach (var item in Tags)
+                                    {
+                                        <li><a href="/tag/@(item.ID).html" title="@item.Name">@item.Name</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+
                         <!-- Product Action -->
                         <div class="product-action clearfix">
                             <div class="product-form__item--quantity">
@@ -517,7 +529,7 @@
                                     <span class="price">@(price.ToString("N0"))</span>
                                 }
                             </div>
-                          
+
                         </div>
                         <!-- End product details -->
                     </div>
@@ -580,10 +592,10 @@
                                     </a>
                                 </div>
                                 @*<div class="compare-btn">
-                            <a class="compare add-to-compare" href="compare.html" title="Add to Compare">
-                                <i class="icon anm anm-random-r"></i>
-                            </a>
-                        </div>*@
+                                        <a class="compare add-to-compare" href="compare.html" title="Add to Compare">
+                                            <i class="icon anm anm-random-r"></i>
+                                        </a>
+                                    </div>*@
                             </div>
                             <!-- end product button -->
                         </div>

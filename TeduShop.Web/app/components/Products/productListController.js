@@ -16,8 +16,7 @@
         $scope.search = search;
         $scope.checkAll = checkAll;
         $scope.deleteMultiple = deleteMultiple;
-
-
+        $scope.updateStatus = updateStatus;
 
         $scope.isAll = false;
         function checkAll() {
@@ -84,6 +83,22 @@
                     notificationService.displayError('Xóa không thành công!')
                 })
             })
+        }
+
+        function updateStatus(id) {
+            var config = {
+                params: {
+                    id: id
+                }
+            }
+          
+            apiService.get('/api/product/ChangeStatus', config,
+                function (result) {
+                    notificationService.displaySuccess(' Đã được cập nhật.');
+                    search()
+                }, function (error) {
+                    notificationService.displayError('cập nhật không thành công.');
+                });
         }
 
         function getProducts(page) {

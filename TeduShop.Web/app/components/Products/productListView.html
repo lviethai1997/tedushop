@@ -34,6 +34,7 @@
                             </th>
                             <th style="width:10%">ID</th>
                             <th>Name</th>
+                            <th>Image</th>
                             <th class="min-tablet">Alias</th>
                             <th class="min-tablet">ParentID</th>
                             <th class="min-desktop">Created Date</th>
@@ -46,13 +47,16 @@
                             <td><input type="checkbox" name="checkItem" ng-model="item.checked" /></td>
                             <td>{{item.ID}}</td>
                             <td>{{item.Name}}</td>
+                            <td><img style="width:150px" src="{{item.Image}}" /></td>
                             <td>{{item.Alias}}</td>
                             <td>{{item.CategoryID}}</td>
                             <td>{{item.CreatedDate | date:'dd-MM-yyyy HH:mm:ss'}}</td>
                             <td style="text-align:center;font-family:Arial;font-weight:bold;font-size:16px">
-                                <span ng-class="{ 'label label-table label-success' : item.Status==true,'label label-table label-danger' : item.Status==false}">
-                                    {{item.Status | statusFilter}}
-                                </span>
+                                <button class="btn btn-lg btn-toolbar">
+                                    <span ng-click="updateStatus(item.ID)" ng-class="{ 'label label-table label-success' : item.Status==true,'label label-table label-danger' : item.Status==false}">
+                                        {{item.Status | statusFilter}}
+                                    </span>
+                                </button>
                             </td>
                             <td>
                                 <button class="btn btn-info btn-rounded" ui-sref="product_edit_view({id:item.ID})"><i class="fas fa-pencil-alt"></i></button>

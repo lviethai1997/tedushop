@@ -23,15 +23,15 @@ namespace TeduShop.Data.Repositories
             return query;
         }
 
-        public IEnumerable<Product> GetProductByTag(string tag, int page, int pageSize, out int totalRow)
+        public IEnumerable<Product> GetProductByTag(string tagId, int page, int pageSize, out int totalRow)
         {
             var query = from product in DbContext.Products
                         join tagg in DbContext.ProductTags
                         on product.ID equals tagg.ProductID
-                        where tagg.TagID == tag && product.Status
+                        where tagg.TagID == tagId && product.Status
                         select product;
             totalRow = query.Count();
-            query = query.Skip((page - 1) * pageSize).Take(pageSize);
+            query = query.OrderByDescending(x => x.CreatedDate).Skip((page - 1) * pageSize).Take(pageSize);
             return query;
         }
     }

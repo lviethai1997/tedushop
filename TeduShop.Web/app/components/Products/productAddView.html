@@ -96,7 +96,7 @@
                 <div class="form-group">
                     <label class="col-sm-1 control-label">Nội dung sản phẩm</label>
                     <div class="col-sm-11">
-                        <textarea type="text" placeholder="Nội dung sản phẩm" name="content" ckeditor="ckeditorOptions" required ng-model="product.Content" rows="13" class="form-control"></textarea>
+                        <ng-ckeditor type="text" remove-plugins="iframe,flash,smiley" placeholder="Nội dung sản phẩm" name="content" required ng-model="product.Content" class="form-control"></ng-ckeditor>
                         <span class="text-danger" ng-show="frmAddProduct.content.$invalid">Vui lòng nhập Nội dung sản phẩm</span>
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                 <div class="form-group">
                     <label class="col-sm-1 control-label">Description</label>
                     <div class="col-sm-11">
-                        <textarea type="text" placeholder="Description" name="description" required ng-model="product.Description" rows="13" class="form-control"></textarea>
+                        <ng-ckeditor type="text" remove-plugins="iframe,flash,smiley" placeholder="Nội dung sản phẩm" name="content" required ng-model="product.Description" class="form-control"></ng-ckeditor>
                         <span class="text-danger" ng-show="frmAddProduct.description.$invalid">Vui lòng nhập Thông tin mô tả</span>
                     </div>
                 </div>
