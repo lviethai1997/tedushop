@@ -14,13 +14,13 @@ namespace TeduShop.Web
           url: "tim-kiem.html",
            namespaces: new string[] { "TeduShop.Web.Controllers" },
           defaults: new { controller = "Product", action = "Search", id = UrlParameter.Optional }
-      );
+        );
 
             routes.MapRoute(
-            name: "About",
-            url: "gioi-thieu.html",
+            name: "Pages",
+            url: "trang/{alias}.html",
              namespaces: new string[] { "TeduShop.Web.Controllers" },
-            defaults: new { controller = "About", action = "Index", id = UrlParameter.Optional }
+            defaults: new { controller = "Page", action = "Index", alias = UrlParameter.Optional }
         );
 
             routes.MapRoute(
@@ -28,7 +28,7 @@ namespace TeduShop.Web
             url: "tag/{tagId}.html",
              namespaces: new string[] { "TeduShop.Web.Controllers" },
             defaults: new { controller = "Product", action = "ListByTag", id = UrlParameter.Optional }
-);
+        );
 
             routes.MapRoute(
               name: "Login",

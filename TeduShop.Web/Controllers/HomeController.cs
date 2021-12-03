@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using TeduShop.Data.Infrastructure;
 using TeduShop.Model.Models;
 using TeduShop.Service;
 using TeduShop.Web.Models;
@@ -10,12 +9,11 @@ namespace TeduShop.Web.Controllers
 {
     public class HomeController : Controller
     {
-        IProductCategoriesService _productCategoriesService;
-        ICommonService _commonService;
-        IProductService _productService;
+        private IProductCategoriesService _productCategoriesService;
+        private ICommonService _commonService;
+        private IProductService _productService;
 
-
-        public HomeController(IProductCategoriesService productCategoriesService, ICommonService commonService,IProductService productService)
+        public HomeController(IProductCategoriesService productCategoriesService, ICommonService commonService, IProductService productService)
         {
             this._productCategoriesService = productCategoriesService;
             this._commonService = commonService;
@@ -34,13 +32,6 @@ namespace TeduShop.Web.Controllers
             homeviewModel.productsSale = productSaleViewmodel;
 
             return View(homeviewModel);
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
         }
 
         [ChildActionOnly]

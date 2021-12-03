@@ -52,7 +52,7 @@ namespace TeduShop.Web.Infrastructure.Extenstion
             product.SellOut = productViewModel.SellOut;
         }
 
-        public static void UpdateProductCategory(this ProductCategory productCategory,ProductCategoryViewModel productCategoryViewModel)
+        public static void UpdateProductCategory(this ProductCategory productCategory, ProductCategoryViewModel productCategoryViewModel)
         {
             productCategory.ID = productCategoryViewModel.ID;
             productCategory.Name = productCategoryViewModel.Name;
@@ -92,6 +92,21 @@ namespace TeduShop.Web.Infrastructure.Extenstion
             post.UpdatedDate = postViewModel.UpdatedDate;
             post.UpdatedBy = postViewModel.UpdatedBy;
             post.Status = postViewModel.Status;
+        }
+
+        public static void UpdatePage(this Page page, PageViewModel pageViewModel)
+        {
+            page.ID = pageViewModel.ID;
+            page.Name = pageViewModel.Name;
+            page.Alias = pageViewModel.Alias;
+            page.Content = pageViewModel.Content;
+            page.MetaKeyword = pageViewModel.MetaKeyword;
+            page.MetaDescription = pageViewModel.MetaDescription;
+            page.CreatedDate = pageViewModel.CreatedDate;
+            page.CreatedBy = pageViewModel.CreatedBy;
+            page.UpdatedDate = pageViewModel.UpdatedDate;
+            page.UpdatedBy = pageViewModel.UpdatedBy;
+            page.Status = pageViewModel.Status;
         }
     }
 }

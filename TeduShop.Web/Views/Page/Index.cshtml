@@ -1,0 +1,16 @@
+﻿@model TeduShop.Web.Models.PageViewModel
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/Layouts.cshtml";
+}
+
+<div class="page section-header text-center">
+    <div class="page-title">
+        <div class="wrapper"><h1 class="page-width">@Model.Name</h1></div>
+    </div>
+</div>
+<!--End Page Title-->
+
+<div class="container">
+   @Html.Raw(Model.Content)
+</div>
