@@ -20,6 +20,7 @@ namespace TeduShop.Web.Controllers
             this._productService = productService;
         }
 
+        [OutputCache(Duration = 60,Location =System.Web.UI.OutputCacheLocation.Server)]
         public ActionResult Index()
         {
             var homeviewModel = new HomeViewModel();
@@ -35,6 +36,7 @@ namespace TeduShop.Web.Controllers
         }
 
         [ChildActionOnly]
+        [OutputCache(Duration =3600)]
         public ActionResult Footer()
         {
             var footerModel = _commonService.GetFooter();
@@ -43,6 +45,7 @@ namespace TeduShop.Web.Controllers
         }
 
         [ChildActionOnly]
+        [OutputCache(Duration = 3600)]
         public ActionResult Header()
         {
             var model = _productCategoriesService.GetAll();

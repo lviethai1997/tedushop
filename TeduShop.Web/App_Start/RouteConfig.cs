@@ -10,11 +10,18 @@ namespace TeduShop.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-          name: "Search",
-          url: "tim-kiem.html",
-           namespaces: new string[] { "TeduShop.Web.Controllers" },
-          defaults: new { controller = "Product", action = "Search", id = UrlParameter.Optional }
-        );
+            name: "Search",
+            url: "tim-kiem.html",
+            namespaces: new string[] { "TeduShop.Web.Controllers" },
+            defaults: new { controller = "Product", action = "Search", id = UrlParameter.Optional }
+          );
+
+            routes.MapRoute(
+            name: "Contact",
+            url: "lien-he.html",
+            namespaces: new string[] { "TeduShop.Web.Controllers" },
+            defaults: new { controller = "Contact", action = "Index", id = UrlParameter.Optional }
+          );
 
             routes.MapRoute(
             name: "Pages",

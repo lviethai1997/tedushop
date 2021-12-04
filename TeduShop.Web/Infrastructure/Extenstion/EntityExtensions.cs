@@ -94,6 +94,20 @@ namespace TeduShop.Web.Infrastructure.Extenstion
             post.Status = postViewModel.Status;
         }
 
+        public static void UpdateContactDetail(this ContactDetail contactDetail, ContactDetailViewModel contactDetailViewModel)
+        {
+            contactDetail.ID = contactDetailViewModel.ID;
+            contactDetail.Name = contactDetailViewModel.Name;
+            contactDetail.Phone = contactDetailViewModel.Phone;
+            contactDetail.Email = contactDetailViewModel.Email;
+            contactDetail.Address = contactDetailViewModel.Address;
+            contactDetail.Website = contactDetailViewModel.Website;
+            contactDetail.Other = contactDetailViewModel.Other;
+            contactDetail.Lat = contactDetailViewModel.Lat;
+            contactDetail.Lng = contactDetailViewModel.Lng;
+            contactDetail.Status = contactDetailViewModel.Status;
+        }
+
         public static void UpdatePage(this Page page, PageViewModel pageViewModel)
         {
             page.ID = pageViewModel.ID;
