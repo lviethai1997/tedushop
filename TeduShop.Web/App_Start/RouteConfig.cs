@@ -9,11 +9,27 @@ namespace TeduShop.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.IgnoreRoute("{*botdetect}", new { botdetect = @"(.*)BotDetectCaptcha\.ashx" });
+
             routes.MapRoute(
             name: "Search",
             url: "tim-kiem.html",
             namespaces: new string[] { "TeduShop.Web.Controllers" },
             defaults: new { controller = "Product", action = "Search", id = UrlParameter.Optional }
+          );
+
+            routes.MapRoute(
+          name: "Register",
+          url: "dang-ky.html",
+          namespaces: new string[] { "TeduShop.Web.Controllers" },
+          defaults: new { controller = "Login", action = "Register", id = UrlParameter.Optional }
+        );
+
+            routes.MapRoute(
+            name: "Login",
+            url: "dang-nhap.html",
+            namespaces: new string[] { "TeduShop.Web.Controllers" },
+            defaults: new { controller = "Login", action = "LoginUser", id = UrlParameter.Optional }
           );
 
             routes.MapRoute(
@@ -35,20 +51,6 @@ namespace TeduShop.Web
             url: "tag/{tagId}.html",
              namespaces: new string[] { "TeduShop.Web.Controllers" },
             defaults: new { controller = "Product", action = "ListByTag", id = UrlParameter.Optional }
-        );
-
-            routes.MapRoute(
-              name: "Login",
-              url: "dang-nhap.html",
-                namespaces: new string[] { "TeduShop.Web.Controllers" },
-              defaults: new { controller = "Login", action = "Login", id = UrlParameter.Optional }
-          );
-
-            routes.MapRoute(
-            name: "Sign Up",
-            url: "dang-ky.html",
-              namespaces: new string[] { "TeduShop.Web.Controllers" },
-            defaults: new { controller = "SignUp", action = "Index", id = UrlParameter.Optional }
         );
 
             routes.MapRoute(

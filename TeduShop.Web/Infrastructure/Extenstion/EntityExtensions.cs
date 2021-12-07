@@ -122,5 +122,15 @@ namespace TeduShop.Web.Infrastructure.Extenstion
             page.UpdatedBy = pageViewModel.UpdatedBy;
             page.Status = pageViewModel.Status;
         }
+
+        public static void UpdateFeedBack(this FeedBack feedBack, FeedBackViewModel feedBackViewModel)
+        {
+            feedBack.ID = feedBackViewModel.ID;
+            feedBack.Name = feedBackViewModel.Name;
+            feedBack.Email = feedBackViewModel.Email;
+            feedBack.Message = feedBackViewModel.Message;
+            feedBack.CreatedDate = System.DateTime.Now;
+            feedBack.Status = feedBackViewModel.Status;
+        }
     }
 }

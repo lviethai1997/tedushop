@@ -1,74 +1,81 @@
-﻿@model TeduShop.Web.Models.ContactDetailViewModel
-
+﻿@model TeduShop.Web.Models.FeedBackViewModel
+@using BotDetect.Web.Mvc;
 @{
     ViewBag.Title = "Liên Hệ";
     Layout = "~/Views/Shared/Layouts.cshtml";
 }
 
+<link href="@BotDetect.Web.CaptchaUrls.Absolute.LayoutStyleSheetUrl" rel="stylesheet" type="text/css" />
 <div class="page section-header text-center">
     <div class="page-title">
-        <div class="wrapper"><h1 class="page-width">Contact Us</h1></div>
+        <div class="wrapper"><h1 class="page-width">Liên Hệ Với Chúng Tôi</h1></div>
     </div>
 </div>
 <!--End Page Title-->
 <div class="map-section map">
     <div id="map" style="width:100%;height:400px"></div>
     @*<div class="container">
-        <div class="row">
-            <div class="map-section__overlay-wrapper">
-                <div class="map-section__overlay">
-                    <h3 class="h4">Our store</h3>
-                    <div class="rte-setting">
-                        <p>123 Fake St.<br>Toronto, Canada</p>
-                        <p>Mon - Fri, 10am - 9pm<br>Saturday, 11am - 9pm<br>Sunday, 11am - 5pm</p>
+            <div class="row">
+                <div class="map-section__overlay-wrapper">
+                    <div class="map-section__overlay">
+                        <h3 class="h4">Our store</h3>
+                        <div class="rte-setting">
+                            <p>123 Fake St.<br>Toronto, Canada</p>
+                            <p>Mon - Fri, 10am - 9pm<br>Saturday, 11am - 9pm<br>Sunday, 11am - 5pm</p>
+                        </div>
+                        <p><a href="https://maps.google.com/?daddr=80%20Spadina%20Ave,%20Toronto" class="btn btn--secondary btn--small" target="_blank">Get directions</a></p>
                     </div>
-                    <p><a href="https://maps.google.com/?daddr=80%20Spadina%20Ave,%20Toronto" class="btn btn--secondary btn--small" target="_blank">Get directions</a></p>
                 </div>
             </div>
-        </div>
-    </div>*@
+        </div>*@
 </div>
 <div class="bredcrumbWrap">
     <div class="container breadcrumbs">
-        <a href="index.html" title="Back to the home page">Home</a><span aria-hidden="true">›</span><span>Contact Us</span>
+        <a href="index.html" title="Back to the home page">Trang chủ</a><span aria-hidden="true">›</span><span>Liên hệ</span>
     </div>
 </div>
 
 <div class="container">
     <div class="row">
         <div class="col-12 col-sm-12 col-md-8 col-lg-8 mb-4">
-            <h2>Drop Us A Line</h2>
+            <h2>Gửi thông tin liên hệ</h2>
             <p>Lorem Ipsum é um texto modelo da indústria tipográfica e de impressão. O Lorem Ipsum tem vindo a ser o texto padrão usado por estas indústrias desde o ano de 1500 </p>
             <div class="formFeilds contact-form form-vertical">
-                <form action="http://annimexweb.com/items/belle/assets/php/mail.php" method="post" id="contact_form" class="contact-form">
+                @using (Html.BeginForm("SendFeedBack", "Contact", FormMethod.Post))
+                {
+                    if (ViewData["SuccessMsg"] != null)
+                    {
+                        <div class="alert alert-success" role="alert">
+                            <strong>Gửi phản hồi thành công!</strong>
+                        </div>
+                    }
+
+                    @Html.ValidationSummary(false, "", new { @class = "error", @style = "font-size:16px;font-wight:bold;color:red" });
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                             <div class="form-group">
-                                <input type="text" id="ContactFormName" name="name" placeholder="Name" value="" required="">
+                                @Html.TextBoxFor(model => model.Name, new { @id = "ContactFormName", @placeholder = "Nhập Họ Và Tên" })
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                             <div class="form-group">
-                                <input type="email" id="ContactFormEmail" name="email" placeholder="Email" value="" required="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <input required="" type="tel" id="ContactFormPhone" name="phone" pattern="[0-9\-]*" placeholder="Phone Number" value="">
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
-                            <div class="form-group">
-                                <input required="" type="text" id="ContactSubject" name="subject" placeholder="Subject" value="">
+                                @Html.TextBoxFor(model => model.Email, new { @id = "ContactFormEmail", @placeholder = "Nhập Email" })
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                             <div class="form-group">
-                                <textarea required="" rows="10" id="ContactFormMessage" name="message" placeholder="Your Message"></textarea>
+                                @Html.TextAreaFor(model => model.Message, new { @id = "ContactFormMessage", @row = "10", @placeholder = "Nhập Nội Dung" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="form-group">
+                                @{ MvcCaptcha exampleCaptcha = new MvcCaptcha("ContactCatcha");}
+                                @Html.Captcha(exampleCaptcha)
+                                @Html.TextBox("CaptchaCode")
                             </div>
                         </div>
                     </div>
@@ -77,20 +84,23 @@
                             <input type="submit" class="btn" value="Send Message">
                         </div>
                     </div>
-                </form>
+
+                }
             </div>
         </div>
         <div class="col-12 col-sm-12 col-md-4 col-lg-4">
             <div class="open-hours">
-                <strong>Opening Hours</strong><br>
-                Mon - Sat : 9am - 11pm<br>
-                Sunday: 11am - 5pm
+                <strong>Giờ mở cửa</strong><br>
+                Thứ 2 - Thứ 7 : 9:00 - 21:00<br>
+                Chủ nhật : 11:00 - 17:00
             </div>
             <hr />
             <ul class="addressFooter">
-                <li><i class="icon anm anm-map-marker-al"></i><p>55 Gallaxy Enque, 2568 steet, 23568 NY</p></li>
-                <li class="phone"><i class="icon anm anm-phone-s"></i><p>(440) 000 000 0000</p></li>
-                <li class="email"><i class="icon anm anm-envelope-l"></i><p>sales@yousite.com</p></li>
+                <li class="name"><i class="icon anm anm-envelope-l"></i><p>Chủ Shop: @Model.contactDetailViewModel.Name</p></li>
+                <li class="name"><i class="icon anm anm-envelope-l"></i><p>Website: @Model.contactDetailViewModel.Website</p></li>
+                <li><i class="icon anm anm-map-marker-al"></i><p>Địa chỉ: @Model.contactDetailViewModel.Address</p></li>
+                <li class="phone"><i class="icon anm anm-phone-s"></i><p>SĐT: @Model.contactDetailViewModel.Phone</p></li>
+                <li class="email"><i class="icon anm anm-envelope-l"></i><p>Email: @Model.contactDetailViewModel.Email</p></li>
             </ul>
             <hr />
             <ul class="list--inline site-footer__social-icons social-icons">

@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<TeduShop.Web.Models.ProductCategoryViewModel>
+@using Microsoft.AspNet.Identity
 <!--Search Form Drawer-->
 <div class="search">
     <div class="search__form">
@@ -41,11 +42,25 @@
             </div>
             <div class="col-2 col-sm-4 col-md-3 col-lg-4 text-right">
                 <span class="user-menu d-block d-lg-none"><i class="anm anm-user-al" aria-hidden="true"></i></span>
-                <ul class="customer-links list-inline">
-                    <li><a href="login.html">Login</a></li>
-                    <li><a href="register.html">Create Account</a></li>
+                @using (Html.BeginForm("Logout", "Login", FormMethod.Post))
+                {
+            <ul class="customer-links list-inline">
+                @if (Request.IsAuthenticated)
+                {
+
+                    @Html.AntiForgeryToken()
+                    <li><a href="/tai-khoan.html">Xin chào: @User.Identity.Name</a></li>
+                    <li><a href="/san-pham-yeu-thich.html">Yêu thích</a></li>
+                    <li><button type="submit" class="btn--link" id="btnLogout">Đăng xuất</button></li>
+                }
+                else
+                {
+                    <li><a href="/dang-nhap.html">Đăng nhập</a></li>
+                    <li><a href="/dang-ky.html">Đăng ký</a></li>
                     <li><a href="wishlist.html">Wishlist</a></li>
-                </ul>
+                }
+            </ul>
+                }
             </div>
         </div>
     </div>
