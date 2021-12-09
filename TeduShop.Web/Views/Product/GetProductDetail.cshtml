@@ -161,12 +161,12 @@
                                 </div>
                             </div>
                             <div class="product-form__item--submit">
-                                <button type="button" name="add" class="btn product-form__cart-submit">
+                                <button type="button" id="btnAddToCart" data-id="@Model.ID" name="add" class="btn product-form__cart-submit btnAddToCart">
                                     <span>Thêm Vào Giỏ Hàng</span>
                                 </button>
                             </div>
                             <div class="shopify-payment-button" data-shopify="payment-button">
-                                <button type="button" class="shopify-payment-button__button shopify-payment-button__button--unbranded">Mua Ngay</button>
+                                <button type="button" data-id="@Model.ID" class="shopify-payment-button__button shopify-payment-button__button--unbranded">Mua Ngay</button>
                             </div>
                         </div>
                         <!-- End Product Action -->
@@ -489,9 +489,9 @@
                             </a>
                             <!-- end product image -->
                             <!-- Start product button -->
-                            <form class="variants add" action="#" onclick="window.location.href='cart.html'" method="post">
-                                <button class="btn btn-addto-cart" type="button">Thêm vào giỏ hàng</button>
-                            </form>
+                            <div class="variants add">
+                                <button class="btn btn-addto-cart btnAddToCart" id="btnAddToCart" data-id="@item.ID" type="button">Thêm vào giỏ hàng</button>
+                            </div>
                             <div class="button-set">
                                 <a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">
                                     <i class="icon anm anm-search-plus-r"></i>
@@ -579,9 +579,11 @@
                             </a>
                             <!-- end product image -->
                             <!-- Start product button -->
-                            <form class="variants add" action="#" onclick="window.location.href='cart.html'" method="post">
-                                <button class="btn btn-addto-cart" type="button">Thêm vào giỏ hàng</button>
-                            </form>
+                            <div class="variants add">
+                                <button type="button" id="btnAddToCart" data-id="@item.ID" name="add" class="btn product-form__cart-submit btnAddToCart">
+                                    <span>Thêm Vào Giỏ Hàng</span>
+                                </button>
+                            </div>
                             <div class="button-set">
                                 <a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">
                                     <i class="icon anm anm-search-plus-r"></i>

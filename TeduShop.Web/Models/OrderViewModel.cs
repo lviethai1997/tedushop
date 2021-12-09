@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
+using TeduShop.Model.Models;
 
-namespace TeduShop.Model.Models
+namespace TeduShop.Web.Models
 {
-    [Table("Orders")]
-    public class Order
+    public class OrderViewModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -38,15 +40,10 @@ namespace TeduShop.Model.Models
 
         public bool Status { get; set; }
 
-        [StringLength(128)]
-        [Column(TypeName = "nvarchar")]
-        public string CustommerId { get; set; }
-
         public DateTime CreateDate { get; set; }
 
-        [ForeignKey("CustommerId")]
-        public virtual ApplicationUser User { set; get; }
+        public string CustommerId { get; set; }
 
-        public virtual IEnumerable<OrderDetail> OrderDetails { get; set; }
+        public virtual IEnumerable<OrderDetailViewModel> OrderDetails { get; set; }
     }
 }

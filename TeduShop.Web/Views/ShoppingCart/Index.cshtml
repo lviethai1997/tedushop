@@ -1,0 +1,149 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Layouts.cshtml";
+}
+@section footerJS{
+   
+}
+<div class="page section-header text-center">
+    <div class="page-title">
+        <div class="wrapper"><h1 class="page-width">Giỏ hàng</h1></div>
+    </div>
+</div>
+<!--End Page Title-->
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
+            <div class="alert alert-success text-uppercase" id="Ordersuccess" style="visibility:hidden" role="alert">
+                <i class="icon anm anm-truck-l icon-large"></i> &nbsp;<strong>Cảm ơn!</strong> bạn đã đặt hàng, chúng tôi sẽ giao trong thời gian sớm nhất!
+            </div>
+            <form action="#" method="post" class="cart style2">
+                <table>
+                    <thead class="cart__row cart__header">
+                        <tr>
+                            <th class="text-center"></th>
+                            <th colspan="2" class="text-center">Sản phẩm</th>
+                            <th class="text-center">Giá tiền</th>
+                            <th class="text-center">Số lượng</th>
+                            <th class="text-right">Giá tiền</th>
+                            <th class="action">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cartBody">
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-left"><a href="/trang-chu.html" class="btn btn-secondary btn--small cart-continue">Tiếp tục mua sắm</a></td>
+                            <td colspan="3" class="text-right">
+                                <button type="submit" name="clear" id="btnDeleteAll" class="btn btn-secondary btn--small  small--hide">Xóa giỏ hàng</button>
+                                <button type="submit" name="update" id="btnUpdateCart" class="btn btn-secondary btn--small cart-continue ml-2">Cập nhật</button>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </form>
+        </div>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-8 col-lg-8 mb-8">
+                    <h5>Thông tin khách hàng</h5>
+                    <form action="#" method="post" id="frmOrderUser">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-6">
+                                <div class="form-group">
+                                    <p class="cart_tearm">
+                                        <label>
+                                            <input type="checkbox" name="tearm" id="chkUserLoginInfo" class="checkbox" value="tearm">
+                                            Sử dụng thông tin đăng nhập
+                                        </label>
+                                    </p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="FirstName">Họ và tên</label>
+                                    <input type="text" name="first_name" placeholder="" id="userFullName" autofocus="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="FirstName">Địa chỉ Email</label>
+                                    <input type="email" name="Email" placeholder="" id="userEmail" autofocus="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="Phone">Số điện thoại</label>
+                                    <input type="number" name="Phone" placeholder="" id="userPhone" autofocus="">
+                                </div>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6 mb-6">
+                                <div class="form-group">
+                                    <label for="Address">Địa chỉ nhà</label>
+                                    <textarea type="text" name="Address" style="height: 162px" placeholder="" id="userAddress" autofocus=""></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Message">Lời nhắn</label>
+                                    <input type="text" name="Message" placeholder="" id="userMessage" autofocus="">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 cart__footer">
+                    <div class="solid-border">
+                        <div class="row border-bottom pb-2">
+                            <span class="col-12 col-sm-6 cart__subtotal-title">Tổng tiền</span>
+                            <span class="col-12 col-sm-6 text-right"><span class="money" id="totalOrder">$735.00</span></span>
+                        </div>
+                        <div class="row border-bottom pb-2 pt-2">
+                            <span class="col-12 col-sm-6 cart__subtotal-title">Thuế VAT</span>
+                            <span class="col-12 col-sm-6 text-right">10%</span>
+                        </div>
+                        <div class="row border-bottom pb-2 pt-2">
+                            <span class="col-12 col-sm-6 cart__subtotal-title">Tiền vận chuyển</span>
+                            <span class="col-12 col-sm-6 text-right">Miễn phí</span>
+                        </div>
+                        <div class="row border-bottom pb-2 pt-2">
+                            <span class="col-12 col-sm-6 cart__subtotal-title"><strong>Tổng hóa đơn</strong></span>
+                            <span class="col-12 col-sm-6 cart__subtotal-title cart__subtotal text-right"><span class="money" id="totalMoney"></span></span>
+                        </div>
+                        <form action="#" method="post">
+                            <div class="form-group">
+                                <label for="address_zip">Nhập vào mã giảm giá</label>
+                                <input type="text" name="coupon">
+                            </div>
+                        </form>
+                        <input type="submit" name="checkout" id="cartCheckout" class="btn btn--small-wide checkout" value="Thanh Toán">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="tplCart" type="x-tmpl-mustache">
+<tr class="cart__row border-bottom line1 cart-flex border-top">
+     <td class="cart__price-wrapper cart-flex-item">
+        <span class="money">{{productId}}</span>
+    </td>
+    <td class="cart__image-wrapper cart-flex-item">
+        <a href="#"><img class="cart__image" src="{{productImage}}" alt="{{productName}}"></a>
+    </td>
+    <td class="cart__meta small--text-left cart-flex-item">
+        <div class="list-view-item__title">
+            <a href="#">{{productName}}</a>
+        </div>
+    </td>
+    <td class="cart__price-wrapper cart-flex-item">
+        <span class="money">{{productPriceF}}</span>
+    </td>
+    <td class="cart__update-wrapper cart-flex-item text-right">
+        <div class="cart__qty text-center">
+            <div class="qtyField">
+                <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon icon-minus"></i></a>
+                <input class="cart__qty-input qty" type="text" name="updates[]" data-price="{{productPrice}}" id="Quantity" data-id="{{productId}}" value="{{productQuantity}}" pattern="[0-9]*" />
+                <a class="qtyBtn plus" href="javascript:void(0);"><i class="icon icon-plus"></i></a>
+            </div>
+        </div>
+    </td>
+    <td class="text-right small--hide cart-price">
+        <div><span class="money" id="amount_{{productId}}">{{Amount}}</span></div>
+    </td>
+    <td class="text-center small--hide"><a href="#" class="btn btn--secondary cart__remove" data-id="{{productId}}" title="Remove tem"><i class="icon icon anm anm-times-l"></i></a></td>
+</tr>
+</script>

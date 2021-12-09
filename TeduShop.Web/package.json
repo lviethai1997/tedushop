@@ -7,6 +7,9 @@
     "jquery": "^3.6.0",
     "jqueryui": "1.11.1",
     "ng-ckeditor": "2.0.5",
-    "angular": "1.7.9"
+    "angular": "1.7.9",
+    "mustache": "4.2.0",
+    "numeral": "2.0.6",
+    "jquery-validation": "1.19.3"
   }
 }

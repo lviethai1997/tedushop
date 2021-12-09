@@ -37,6 +37,7 @@
 
         <script src="/Assets/client/assets/js/vendor/jquery-3.3.1.min.js"></script>
         <script src="/node_modules/jqueryui/jquery-ui.min.js"></script>
+        <script src="/node_modules/mustache/mustache.js"></script>
         <script src="/Assets/client/assets/js/common.js"></script>
         <script src="/Assets/client/assets/js/vendor/jquery.cookie.js"></script>
         <script src="/Assets/client/assets/js/vendor/modernizr-3.6.0.min.js"></script>
@@ -50,11 +51,16 @@
 
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxBdIt2ZM1E01xJZgUc7HfdxCwA10EBU4&callback=initMap&libraries=&v=weekly" async></script>
         <script src="/Assets/client/assets/js/googleMap.js"></script>
-    
+
         <script src="/Assets/client/assets/js/vendor/photoswipe.min.js"></script>
         <script src="/Assets/client/assets/js/vendor/photoswipe-ui-default.min.js"></script>
-        <!--For Newsletter Popup-->
+        <script src="/node_modules/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="/node_modules/jquery-validation/dist/additional-methods.min.js"></script>
+        <script src="/node_modules/numeral/numeral.js"></script>
+        <script src="/Assets/client/assets/js/controller/shoppingCart.js"></script>
 
+        <!--For Newsletter Popup-->
+        @RenderSection("footerJS", required: false)
         <script>
             $(function () {
                 var $pswp = $('.pswp')[0],

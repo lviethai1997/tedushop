@@ -137,6 +137,18 @@
     <Compile Include="Migrations\202112060214081_UpdateContactDetail.designer.cs">
       <DependentUpon>202112060214081_UpdateContactDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202112090133332_addCustommerId.cs" />
+    <Compile Include="Migrations\202112090133332_addCustommerId.designer.cs">
+      <DependentUpon>202112090133332_addCustommerId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112090330162_addQuantityOrderDetail.cs" />
+    <Compile Include="Migrations\202112090330162_addQuantityOrderDetail.designer.cs">
+      <DependentUpon>202112090330162_addQuantityOrderDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202112090408334_addQuantityOrderDetail1.cs" />
+    <Compile Include="Migrations\202112090408334_addQuantityOrderDetail1.designer.cs">
+      <DependentUpon>202112090408334_addQuantityOrderDetail1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ContactDetailRepository.cs" />
@@ -212,6 +224,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202112060214081_UpdateContactDetail.resx">
       <DependentUpon>202112060214081_UpdateContactDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112090133332_addCustommerId.resx">
+      <DependentUpon>202112090133332_addCustommerId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112090330162_addQuantityOrderDetail.resx">
+      <DependentUpon>202112090330162_addQuantityOrderDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202112090408334_addQuantityOrderDetail1.resx">
+      <DependentUpon>202112090408334_addQuantityOrderDetail1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

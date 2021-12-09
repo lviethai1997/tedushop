@@ -11,5 +11,6 @@ namespace TeduShop.Common
         public const string ProductTag = "product";
         public const string PostTag = "post";
         public const int DefaultFooter = 1;
+        public const string SesstionCart = "SesstionCart";
     }
 }

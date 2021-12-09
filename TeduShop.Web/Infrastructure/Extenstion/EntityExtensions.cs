@@ -1,4 +1,6 @@
-﻿using TeduShop.Model.Models;
+﻿using AutoMapper;
+using System.Collections.Generic;
+using TeduShop.Model.Models;
 using TeduShop.Web.Models;
 
 namespace TeduShop.Web.Infrastructure.Extenstion
@@ -70,6 +72,21 @@ namespace TeduShop.Web.Infrastructure.Extenstion
             productCategory.UpdatedDate = productCategoryViewModel.UpdatedDate;
             productCategory.UpdatedBy = productCategoryViewModel.UpdatedBy;
             productCategory.Status = productCategoryViewModel.Status;
+        }
+
+        public static void UpdateOrder(this Order order, OrderViewModel orderViewModel)
+        {
+            order.ID = orderViewModel.ID;
+            order.CustomerName = orderViewModel.CustomerName;
+            order.CustomerAddress = orderViewModel.CustomerAddress;
+            order.CustomerEmail = orderViewModel.CustomerEmail;
+            order.CustomerMobile = orderViewModel.CustomerMobile;
+            order.CustomerMessage = orderViewModel.CustomerMessage;
+            order.PaymentMethod = orderViewModel.PaymentMethod;
+            order.PaymentStatus = orderViewModel.PaymentStatus;
+            order.Status = orderViewModel.Status;
+            order.CustommerId = orderViewModel.CustommerId;
+            order.CreateDate = System.DateTime.Now;
         }
 
         public static void UpdatePost(this Post post, PostViewModel postViewModel)
