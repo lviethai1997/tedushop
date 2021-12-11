@@ -18,6 +18,7 @@ namespace TeduShop.Web.Controllers
     {
         // GET: ShoppingCart
         private IProductService _productService;
+
         private IOrderService _orderService;
         private ApplicationUserManager _userManager;
         private IUnitOfWork _unitOfWork;
@@ -48,6 +49,15 @@ namespace TeduShop.Web.Controllers
             }
 
             var cart = (List<ShoppingCartViewModel>)Session[Common.CommonConstants.SesstionCart];
+
+            if (cart.Count > 0)
+            {
+                foreach (var item in cart)
+                {
+                    item.Product = Mapper.Map<Product, ProductViewModel>(_productService.GetById(item.ProductId));
+                }
+            }
+
             return Json(new
             {
                 data = cart,
@@ -58,10 +68,22 @@ namespace TeduShop.Web.Controllers
         [HttpPost]
         public JsonResult Add(int productId)
         {
-            var cart = (List<ShoppingCartViewModel>)Session[Common.CommonConstants.SesstionCart];
+            var cart = (List<ShoppingCartViewModel>)Session[CommonConstants.SesstionCart];
+
             if (cart == null)
             {
                 cart = new List<ShoppingCartViewModel>();
+            }
+
+            var product = _productService.GetById(productId);
+
+            if (product.Quantity == 0)
+            {
+                return Json(new
+                {
+                    status = false,
+                    message = "Sản phẩm đã hết hàng"
+                });
             }
 
             if (cart.Any(x => x.ProductId == productId))
@@ -78,9 +100,8 @@ namespace TeduShop.Web.Controllers
             {
                 ShoppingCartViewModel newItem = new ShoppingCartViewModel();
                 newItem.ProductId = productId;
-                var product = _productService.GetById(productId);
                 newItem.Product = Mapper.Map<Product, ProductViewModel>(product);
-                newItem.Product.Quantity = 1;
+                newItem.Quantity = 1;
                 cart.Add(newItem);
             }
 
@@ -116,24 +137,38 @@ namespace TeduShop.Web.Controllers
         [HttpPost]
         public JsonResult Update(string cartData)
         {
-            var cartViewModel = (List<ShoppingCartViewModel>)Session[Common.CommonConstants.SesstionCart];
+            var cartViewModel = (List<ShoppingCartViewModel>)Session[CommonConstants.SesstionCart];
+
             var cartSS = new JavaScriptSerializer().Deserialize<List<ShoppingCartViewModel>>(cartData);
+
+            string message = "";
             foreach (var item in cartSS)
             {
                 foreach (var jitem in cartViewModel)
                 {
                     if (item.ProductId == jitem.ProductId)
                     {
-                        jitem.Quantity = item.Quantity;
+                        var product = _productService.GetById(item.ProductId);
+
+                        if (item.Quantity > product.Quantity)
+                        {
+                            message += "Sản phẩm " + product.Name + " không còn đủ hàng. \r\n";
+                            item.Quantity = 1;
+                        }
+                        else
+                        {
+                            jitem.Quantity = item.Quantity;
+                        }
                     }
                 }
             }
 
-            Session[Common.CommonConstants.SesstionCart] = cartSS;
+            Session[CommonConstants.SesstionCart] = cartSS;
 
             return Json(new
             {
-                status = true
+                status = true,
+                message = message
             });
         }
 
@@ -180,20 +215,35 @@ namespace TeduShop.Web.Controllers
 
             var cart = (List<ShoppingCartViewModel>)Session[CommonConstants.SesstionCart];
             List<OrderDetail> orderDetails = new List<OrderDetail>();
-
+            bool isEnough = false;
             foreach (var item in cart)
             {
                 var detail = new OrderDetail();
                 detail.ProductID = item.ProductId;
                 detail.Quantity = item.Quantity;
+                detail.Price = item.Product.Price;
+                isEnough = _productService.SellProduct(item.ProductId, item.Quantity);
                 orderDetails.Add(detail);
+                break;
             }
 
-            var ins = _orderService.Create(orderNew, orderDetails);
-            return Json(new
+            if (!isEnough)
             {
-                status = true
-            });
+                _orderService.Create(orderNew, orderDetails);
+                _productService.SaveChanges();
+                return Json(new
+                {
+                    status = true
+                });
+            }
+            else
+            {
+                return Json(new
+                {
+                    status = false,
+                    message = "sản phẩm ko đủ hàng."
+                });
+            }
         }
     }
 }

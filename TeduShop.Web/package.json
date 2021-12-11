@@ -10,6 +10,8 @@
     "angular": "1.7.9",
     "mustache": "4.2.0",
     "numeral": "2.0.6",
-    "jquery-validation": "1.19.3"
+    "jquery-validation": "1.19.3",
+    "toastr": "2.1.4",
+    "angular-chart.js": "1.1.1"
   }
 }

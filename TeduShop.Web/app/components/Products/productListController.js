@@ -114,7 +114,6 @@
                 if (result.data.TotalCount == 0) {
                     notificationService.displayWarning('Không tìm thấy dữ liệu nào!')
                 }
-
                 $scope.products = result.data.Items;
                 $scope.page = result.data.Page;
                 $scope.pagesCount = result.data.TotalPage;

@@ -31,11 +31,11 @@ namespace TeduShop.Web.Api
             {
                 int totalRow = 0;
 
-                var model = _productService.GetAll(keyWord);
+                var model = _productService.GetAll(keyWord, page, pageSize);
                 totalRow = model.Count();
 
-                var query = model.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
-                var responseData = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(query);
+                //var query = model.OrderByDescending(x => x.CreatedDate).Skip(page * pageSize).Take(pageSize);
+                var responseData = Mapper.Map<IEnumerable<Product>, IEnumerable<ProductViewModel>>(model);
                 var paginationSet = new PaginationSet<ProductViewModel>()
                 {
                     Items = responseData,

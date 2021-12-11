@@ -43,6 +43,10 @@ namespace TeduShop.Web.Models
 
         public int Quantity { get; set; }
 
+        public string Size { get; set; }
+
+        public decimal OriginalPrice { get; set; }
+
         public virtual ProductCategoryViewModel ProductCategoryViewModel { get; set; }
 
         public virtual IEnumerable<ProductTagViewModel> ProductTagViewModel { get; set; }

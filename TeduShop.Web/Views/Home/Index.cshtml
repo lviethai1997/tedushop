@@ -63,7 +63,7 @@
                     var url = "/" + item.Alias + ".p-" + item.ID + ".html";
                     var price = item.Price;
                     var promotion = item.Promotion;
-                    var Percent = promotion / (price + promotion) * 100;
+                    var Percent = (price - promotion) / promotion * 100;
                     <div class="col-6 col-sm-6 col-md-3 col-lg-3 item grid-view-item style2">
                         <div class="grid-view_image">
                             <!-- start product image -->
@@ -208,7 +208,7 @@
                 }
             </div>
         </div>
-        <div class="clear text-center"><a href="#" class="btn">View all</a></div>
+        @*<div class="clear text-center"><a href="#" class="btn">View all</a></div>*@
     </div>
 </div>
 <!--End Featured Product-->

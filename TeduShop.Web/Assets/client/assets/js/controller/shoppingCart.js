@@ -144,6 +144,9 @@
     UpdateCart: function () {
         var cartList = [];
         $.each($('.cart__qty-input'), function (i, item) {
+            if ($(item).val() == "") {
+                $(item).val(0)
+            }
             cartList.push({
                 ProductId: $(item).data('id'),
                 Quantity: $(item).val()
@@ -158,6 +161,9 @@
             },
             success: function (response) {
                 if (response.status == true) {
+                    if (response.message != "") {
+                        toastr.error(response.message,"Sản phẩm không đủ hàng")
+                    }
                     cart.loadData();
                 }
             }
@@ -181,7 +187,9 @@
             dataType: 'json',
             success: function (response) {
                 if (response.status == true) {
-                    alert("ok");
+                    toastr.success('Thêm vào giỏ hàng thành công!', 'Thông báo')
+                } else {
+                    toastr.error(response.message,"Thất bại")
                 }
             }
         })
@@ -223,15 +231,17 @@
                     var html = '';
                     var tplCart = $('#tplCart').html();
                     var data = res.data;
+               
                     $.each(data, function (i, item) {
                         html += Mustache.render(tplCart, {
                             productId: item.ProductId,
                             productName: item.Product.Name,
                             productImage: item.Product.Image,
                             productPrice: item.Product.Price,
+                            productAlias: item.Product.Alias,
                             productPriceF: numeral(item.Product.Price).format('0,0'),
-                            productQuantity: item.Product.Quantity,
-                            Amount: numeral(item.Product.Quantity * item.Product.Price).format('0,0'),
+                            productQuantity: item.Quantity,
+                            Amount: numeral(item.Quantity * item.Product.Price).format('0,0'),
                         })
                     })
 

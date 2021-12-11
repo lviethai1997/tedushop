@@ -15,6 +15,8 @@ namespace TeduShop.Model.Models
 
         public int Quantity { get; set; }
 
+        public decimal Price { get; set; }
+
         [ForeignKey("OrderID")]
         public virtual Order Order { get; set; }
 

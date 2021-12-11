@@ -8,7 +8,7 @@ namespace TeduShop.Service
 {
     public interface IOrderService
     {
-        bool Create(Order order,List<OrderDetail> orderDetails);
+        bool Create(Order order, List<OrderDetail> orderDetails);
 
         Order Update(Order order);
     }
@@ -38,7 +38,7 @@ namespace TeduShop.Service
                     item.OrderID = order.ID;
                     _orderDetailRepository.Add(item);
                 }
-                _unitOfWork.Commit();
+
                 return true;
             }
             catch (Exception ex)

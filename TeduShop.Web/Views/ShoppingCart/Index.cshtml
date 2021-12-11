@@ -126,7 +126,7 @@
     </td>
     <td class="cart__meta small--text-left cart-flex-item">
         <div class="list-view-item__title">
-            <a href="#">{{productName}}</a>
+            <a href="/{{productAlias}}.p-{{productId}}.html">{{productName}}</a>
         </div>
     </td>
     <td class="cart__price-wrapper cart-flex-item">
@@ -135,9 +135,7 @@
     <td class="cart__update-wrapper cart-flex-item text-right">
         <div class="cart__qty text-center">
             <div class="qtyField">
-                <a class="qtyBtn minus" href="javascript:void(0);"><i class="icon icon-minus"></i></a>
-                <input class="cart__qty-input qty" type="text" name="updates[]" data-price="{{productPrice}}" id="Quantity" data-id="{{productId}}" value="{{productQuantity}}" pattern="[0-9]*" />
-                <a class="qtyBtn plus" href="javascript:void(0);"><i class="icon icon-plus"></i></a>
+                <input class="cart__qty-input qty" type="number" data-price="{{productPrice}}" id="Quantity" data-id="{{productId}}" value="{{productQuantity}}"/>
             </div>
         </div>
     </td>

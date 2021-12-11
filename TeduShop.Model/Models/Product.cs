@@ -57,6 +57,8 @@ namespace TeduShop.Model.Models
 
         public string Tags { get; set; }
 
+        public decimal OriginalPrice { get; set; }
+
         [ForeignKey("CategoryID")]
         public virtual ProductCategory ProductCategory { get; set; }
 

@@ -52,6 +52,7 @@ namespace TeduShop.Web.Infrastructure.Extenstion
             product.Tags = productViewModel.Tags;
             product.Quantity = productViewModel.Quantity;
             product.SellOut = productViewModel.SellOut;
+            product.OriginalPrice = productViewModel.OriginalPrice;
         }
 
         public static void UpdateProductCategory(this ProductCategory productCategory, ProductCategoryViewModel productCategoryViewModel)

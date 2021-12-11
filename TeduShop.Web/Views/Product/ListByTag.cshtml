@@ -275,7 +275,7 @@
                                 var url = "/" + item.Alias + ".p-" + item.ID + ".html";
                                 var price = item.Price;
                                 var promotion = item.Promotion;
-                                var Percent = promotion / (price + promotion) * 100;
+                                
                                 <div class="col-6 col-sm-6 col-md-4 col-lg-4 item">
                                     <!-- start product image -->
                                     <div class="product-image">
@@ -295,6 +295,7 @@
                                                 }
                                                 @if (promotion > 0)
                                                 {
+                                                    var Percent = (price - promotion) / promotion * 100;
                                                     <span class="lbl on-sale">@(Math.Ceiling(Percent))%</span>
                                                 }
                                                 <span class="lbl pr-label1">new</span>

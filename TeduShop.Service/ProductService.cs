@@ -19,7 +19,7 @@ namespace TeduShop.Service
 
         IEnumerable<Product> GetAll();
 
-        IEnumerable<Product> GetAll(string keyword);
+        IEnumerable<Product> GetAll(string keyword, int page, int pageSize = 20);
 
         IEnumerable<Product> GetTopSaleProducts(int top);
 
@@ -54,6 +54,9 @@ namespace TeduShop.Service
         Tag GetTag(string tagId);
 
         IEnumerable<Product> GetListByProductTag(string tagId, int page, int pageSize, out int totalRow);
+
+        bool SellProduct(int productId, int Quantity);
+        
     }
 
     public class ProductService : IProductService
@@ -109,15 +112,17 @@ namespace TeduShop.Service
             return _productRepository.GetAll(new string[] { "ProductCategory" });
         }
 
-        public IEnumerable<Product> GetAll(string keyword)
+        public IEnumerable<Product> GetAll(string keyword, int page, int pageSize = 20)
         {
-            if (string.IsNullOrEmpty(keyword))
+            if (keyword == null)
             {
-                return _productRepository.GetAll();
+                 var query =_productRepository.GetMulti(x => x.Name != null).OrderByDescending(x => x.CreatedDate);
+                return query.Skip((page - 1) * pageSize).Take(pageSize);
             }
             else
             {
-                return _productRepository.GetMulti(x => x.Name.Contains(keyword));
+                var query = _productRepository.GetMulti(x => x.Name.Contains(keyword)).OrderByDescending(x => x.CreatedDate);
+                return query.Skip((page - 1) * pageSize).Take(pageSize);
             }
         }
 
@@ -304,6 +309,17 @@ namespace TeduShop.Service
         public Tag GetTag(string tagId)
         {
             return _tagRepository.GetSingleByCondition(x => x.ID == tagId);
+        }
+
+        public bool SellProduct(int productId, int Quantity)
+        {
+            var product = _productRepository.GetSingleById(productId);
+            if (product.Quantity < Quantity)
+            {
+                return false;
+            }
+            product.Quantity -= Quantity;
+            return true;
         }
     }
 }

@@ -10,7 +10,7 @@
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(TeduShop.Data.TeduShopDbContext context)
@@ -48,19 +48,19 @@
 
         private void CreateProductCategorySample(TeduShop.Data.TeduShopDbContext context)
         {
-            if (context.ProductCategories.Count() == 0)
-            {
-                List<ProductCategory> listProductCategory = new List<ProductCategory>()
-            {
-                new ProductCategory() { Name = "haile",ParentID=1,HomeFlag=true,CreatedDate=DateTime.Now, Status = true },
-                new ProductCategory() { Name = "haile122",ParentID=2,HomeFlag=true,CreatedDate=DateTime.Now, Status = true },
-                new ProductCategory() { Name = "haile233",ParentID=3,HomeFlag=true,CreatedDate=DateTime.Now, Status = true },
-                new ProductCategory() { Name = "haile344",ParentID=4,HomeFlag=true,CreatedDate=DateTime.Now, Status = true }
-            };
+            //if (context.ProductCategories.Count() == 0)
+            //{
+            //    List<ProductCategory> listProductCategory = new List<ProductCategory>()
+            //{
+            //    new ProductCategory() { Name = "haile",ParentID=1,HomeFlag=true,CreatedDate=DateTime.Now, Status = true },
+            //    new ProductCategory() { Name = "haile122",ParentID=2,HomeFlag=true,CreatedDate=DateTime.Now, Status = true },
+            //    new ProductCategory() { Name = "haile233",ParentID=3,HomeFlag=true,CreatedDate=DateTime.Now, Status = true },
+            //    new ProductCategory() { Name = "haile344",ParentID=4,HomeFlag=true,CreatedDate=DateTime.Now, Status = true }
+            //};
 
-                context.ProductCategories.AddRange(listProductCategory);
-                context.SaveChanges();
-            }
+            //    context.ProductCategories.AddRange(listProductCategory);
+            //    context.SaveChanges();
+            //}
         }
     }
 }

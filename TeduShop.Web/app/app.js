@@ -1,8 +1,7 @@
 ﻿/// <reference path="../assets/admin/scripts/angular.js" />
 
-
 (function () {
-    angular.module('tedushop', ['tedushop.products', 'tedushop.ProductCategories', 'tedushop.common']).config(config).config(configAuthentication);
+    angular.module('tedushop', ['tedushop.products', 'tedushop.ProductCategories','tedushop.statistic', 'tedushop.common']).config(config).config(configAuthentication);
 
     config.$inject = ['$stateProvider', '$urlRouterProvider'];
 
@@ -31,7 +30,6 @@
                     return config;
                 },
                 requestError: function (rejection) {
-
                     return $q.reject(rejection);
                 },
                 response: function (response) {
@@ -42,7 +40,6 @@
                     return response;
                 },
                 responseError: function (rejection) {
-
                     if (rejection.status == "401") {
                         $location.path('/login');
                     }
@@ -51,5 +48,4 @@
             };
         });
     }
-
 })();

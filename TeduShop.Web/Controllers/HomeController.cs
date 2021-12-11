@@ -20,7 +20,7 @@ namespace TeduShop.Web.Controllers
             this._productService = productService;
         }
 
-        [OutputCache(Duration = 60,Location =System.Web.UI.OutputCacheLocation.Server)]
+        //[OutputCache(Duration = 60,Location =System.Web.UI.OutputCacheLocation.Server)]
         public ActionResult Index()
         {
             var homeviewModel = new HomeViewModel();
