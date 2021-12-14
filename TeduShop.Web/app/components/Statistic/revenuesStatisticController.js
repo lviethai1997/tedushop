@@ -9,6 +9,49 @@
         $scope.labels = [];
         $scope.series = ['Doanh thu', 'Lợi Nhuận'];
         $scope.data = [];
+        $scope.colors = ['#803690', '#46BFBD'];
+       
+        $scope.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];
+
+        $scope.options = {
+            responsive: true,
+            scales: {
+                yAxes: [
+                    {
+                        id: 'y-axis-1',
+                        type: 'linear',
+                        display: true,
+                        position: 'left',
+                        ticks: {
+                            beginAtZero: true,
+                            userCallback: function (value, index, values) {
+                                return value.toLocaleString();   // this is all we need
+                            }
+                        }
+                    },
+                    {
+                        id: 'y-axis-2',
+                        type: 'linear',
+                        display: true,
+                        position: 'right',
+                        ticks: {
+                            beginAtZero: true,
+                            userCallback: function (value, index, values) {
+                                return value.toLocaleString();   // this is all we need
+                            }
+                        }
+                    },
+
+                ]
+            },
+            //tooltips: {
+            //    callbacks: {
+            //        label: function (tooltipItem, data) {
+            //            return tooltipItem.yLabel.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+            //        }
+            //    }
+            //}
+        };
 
         function getStatistic() {
             var config = {
@@ -37,8 +80,6 @@
                 notificationService.displayError("loi");
             })
         }
-
-
         getStatistic();
     }
 })(angular.module('tedushop.statistic'));

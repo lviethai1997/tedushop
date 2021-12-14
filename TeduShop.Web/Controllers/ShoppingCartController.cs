@@ -222,9 +222,9 @@ namespace TeduShop.Web.Controllers
                 detail.ProductID = item.ProductId;
                 detail.Quantity = item.Quantity;
                 detail.Price = item.Product.Price;
-                isEnough = _productService.SellProduct(item.ProductId, item.Quantity);
+                //isEnough = _productService.SellProduct(item.ProductId, item.Quantity);
                 orderDetails.Add(detail);
-                break;
+                //break;
             }
 
             if (!isEnough)
